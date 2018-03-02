@@ -1,0 +1,40 @@
+group 'ir.kasra-sh'
+version '0.1a'
+apply plugin: 'idea'
+apply plugin: 'java'
+
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    maven { url "https://jitpack.io" }
+}
+configurations {
+    quasar
+}
+dependencies {
+    //testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile 'co.paralleluniverse:quasar-core:0.7.9:jdk8'
+    quasar 'co.paralleluniverse:quasar-core:0.7.9:jdk8'
+}
+
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'Gradle Jar File Example',
+                'Implementation-Version': version,
+                'Main-Class': 'ir.kasra_sh.Main'
+    }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+tasks.withType(JavaExec)
+        {
+            jvmArgs "-javaagent:${(++configurations.quasar.iterator())}"
+        }
+
+task run(type: JavaExec) {
+    main = 'ir.kasra_sh.Main'
+    classpath = sourceSets.main.runtimeClasspath
+}
