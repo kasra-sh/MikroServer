@@ -30,10 +30,10 @@ public class UploadHandler extends Handler {
     @Suspendable
     @Override
     public int handle(HTTPConnection conn) {
-        System.out.println(":)");
+        //System.out.println(":)");
         String key = conn.getOption("key");
-        System.out.println("key = "+key);
-        System.out.println("len = "+conn.getHeader("Content-Length"));
+        //System.out.println("key = "+key);
+        //System.out.println("len = "+conn.getHeader("Content-Length"));
         if (key == null) {
             key="";
         }
@@ -42,7 +42,7 @@ public class UploadHandler extends Handler {
             System.out.println(fsize);
             if (fsize > 0) {
                 String ct = conn.getHeader("Content-Type");
-                System.out.println(ct);
+                //System.out.println(ct);
                 if (mimes.contains(ct)) {
                     conn.getBody();
                     String username = conn.getHeader("x-username");

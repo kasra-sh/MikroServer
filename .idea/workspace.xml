@@ -7,13 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="458739cb-86bb-44be-b020-62eb68b1e8ab" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/Defaults/EchoHandler.java" afterPath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/Handlers/EchoHandler.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/Defaults/ErrorHandler.java" afterPath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/Handlers/ErrorHandler.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/Defaults/FileServerHandler.java" afterPath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/Handlers/FileServerHandler.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/Defaults/Proxifier.java" afterPath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/Handlers/Proxifier.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/Defaults/ProxyHandler.java" afterPath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/Handlers/ProxyHandler.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/Defaults/ProxyRoute.java" afterPath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/Handlers/ProxyRoute.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/Defaults/UploadHandler.java" afterPath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/Handlers/UploadHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/Handlers/UploadHandler.java" afterPath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/Handlers/UploadHandler.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -83,11 +77,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UploadHandler.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="UploadHandler.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/Handlers/UploadHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="237">
-              <caret line="40" column="35" lean-forward="true" selection-start-line="40" selection-start-column="35" selection-end-line="40" selection-end-column="35" />
+            <state relative-caret-position="269">
+              <caret line="61" column="41" lean-forward="true" selection-start-line="61" selection-start-column="41" selection-end-line="61" selection-end-column="41" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -150,11 +144,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RequestParser.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="RequestParser.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/HTTPUtils/RequestParser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="361">
-              <caret line="100" column="16" lean-forward="false" selection-start-line="100" selection-start-column="16" selection-end-line="100" selection-end-column="16" />
+            <state relative-caret-position="317">
+              <caret line="98" column="10" lean-forward="false" selection-start-line="98" selection-start-column="10" selection-end-line="98" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -506,7 +500,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/ir/kasra_sh/Examples/RootHandler.java" />
         <option value="$PROJECT_DIR$/src/main/java/ir/kasra_sh/Examples/FaviconHandler.java" />
         <option value="$PROJECT_DIR$/src/main/java/ir/kasra_sh/Examples/EchoHandler.java" />
         <option value="$PROJECT_DIR$/src/main/java/ir/kasra_sh/Examples/ErrorHandler.java" />
@@ -557,6 +550,7 @@
         <option value="$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/IO/DynamicFS/RandomKeyHandler.java" />
         <option value="$PROJECT_DIR$/src/main/java/ir/kasra_sh/Defaults/UploadHandler.java" />
         <option value="$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/HTTPUtils/RequestParser.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ir/kasra_sh/Handlers/UploadHandler.java" />
       </list>
     </option>
   </component>
@@ -899,6 +893,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="349" y="371" width="1920" height="1028" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -913,7 +908,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977462" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19621621" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19621621" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32972974" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1273,16 +1268,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/Handlers/UploadHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
-          <caret line="40" column="35" lean-forward="true" selection-start-line="40" selection-start-column="35" selection-end-line="40" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/HTTPUtils/HTTPConnection.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="31">
@@ -1296,9 +1281,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/HTTPUtils/RequestParser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="100" column="16" lean-forward="false" selection-start-line="100" selection-start-column="16" selection-end-line="100" selection-end-column="16" />
+        <state relative-caret-position="317">
+          <caret line="98" column="10" lean-forward="false" selection-start-line="98" selection-start-column="10" selection-end-line="98" selection-end-column="10" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/Handlers/UploadHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="269">
+          <caret line="61" column="41" lean-forward="true" selection-start-line="61" selection-start-column="41" selection-end-line="61" selection-end-column="41" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
