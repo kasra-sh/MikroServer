@@ -1,7 +1,5 @@
-package ir.kasra_sh.Defaults;
+package ir.kasra_sh.Handlers;
 
-import co.paralleluniverse.fibers.SuspendExecution;
-import co.paralleluniverse.fibers.Suspendable;
 import ir.kasra_sh.MikroWebServer.HTTPUtils.HTTPConnection;
 import ir.kasra_sh.MikroWebServer.HTTPUtils.ResponseCode;
 import ir.kasra_sh.MikroWebServer.IO.Handler;

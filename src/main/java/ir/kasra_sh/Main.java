@@ -1,7 +1,7 @@
 package ir.kasra_sh;
 
 import co.paralleluniverse.fibers.SuspendExecution;
-import ir.kasra_sh.Defaults.*;
+import ir.kasra_sh.Handlers.*;
 import ir.kasra_sh.MikroWebServer.IO.DynamicFS.RandomKeyHandler;
 import ir.kasra_sh.MikroWebServer.HTTPUtils.HTTPConnection;
 import ir.kasra_sh.MikroWebServer.HTTPUtils.ResponseCode;
@@ -9,7 +9,6 @@ import ir.kasra_sh.MikroWebServer.IO.LightWebServer;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.net.Proxy;
 import java.util.Scanner;
 
 public class Main {

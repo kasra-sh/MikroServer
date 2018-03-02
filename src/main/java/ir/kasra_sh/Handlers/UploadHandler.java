@@ -1,24 +1,16 @@
-package ir.kasra_sh.Defaults;
+package ir.kasra_sh.Handlers;
 
 import co.paralleluniverse.fibers.Suspendable;
-import com.google.common.collect.ConcurrentHashMultiset;
-import com.google.common.collect.Sets;
 import ir.kasra_sh.MikroWebServer.HTTPUtils.HTTPConnection;
 import ir.kasra_sh.MikroWebServer.HTTPUtils.HTTPMethod;
 import ir.kasra_sh.MikroWebServer.HTTPUtils.ResponseCode;
 import ir.kasra_sh.MikroWebServer.IO.Handler;
 import ir.kasra_sh.MikroWebServer.Utils.MimeTypes;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.OpenOption;
 import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
-import java.util.Date;
 import java.util.HashSet;
-import java.util.Set;
 
 @Suspendable
 public class UploadHandler extends Handler {
