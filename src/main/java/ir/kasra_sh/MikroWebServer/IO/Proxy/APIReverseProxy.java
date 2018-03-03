@@ -27,7 +27,7 @@ public class APIReverseProxy implements Runnable {
     public void run() {
         try {
             System.out.println("Routing "+sock.getLocalAddress()+" to "+des.getHostName()+":"+des.getPort());
-            System.out.println(new String(dt,0,len));
+            //System.out.println(new String(dt,0,len));
             Socket d = new Socket(des.getHostName(),des.getPort());
             InputStream dis = d.getInputStream();
             OutputStream dos = d.getOutputStream();
@@ -38,7 +38,7 @@ public class APIReverseProxy implements Runnable {
             boolean sfin=false;
             while (true){
                 int l = 0;
-                System.out.println("len before : "+len);
+                //System.out.println("len before : "+len);
                 if ((len >= dt.length) && (!sfin)) {
                     try {
                         l = sis.read(dt, len, dt.length-len);
@@ -54,10 +54,10 @@ public class APIReverseProxy implements Runnable {
                 } else sfin = true;
 
                 if (len>0) {
-                    System.out.println("len after : "+len);
+                    //System.out.println("len after : "+len);
                     dos.write(dt,0, len);
                     len = 0;
-                    System.out.println("Wrote to Dest");
+                    //System.out.println("Wrote to Dest");
                     if (sfin) {
                         dos.flush();
                         d.shutdownOutput();

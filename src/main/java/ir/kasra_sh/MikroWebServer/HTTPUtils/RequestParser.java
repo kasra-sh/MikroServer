@@ -112,7 +112,7 @@ public class RequestParser {
         try {
             ln = Integer.valueOf(properties.getHeaders().getProperty("Content-Length"));
         }catch (Exception w){ }
-        System.out.println(properties.getHeader("Content-Length"));
+        //System.out.println(properties.getHeader("Content-Length"));
         //System.out.println("ln : "+ln);
         //System.out.println("len read : "+len);
         if (properties.getMethod() != HTTPMethod.POST || ln<=0) {
@@ -144,7 +144,7 @@ public class RequestParser {
             properties.setHeaderSize((len-hlen)+l);
         }
 
-        System.out.println("Body size : " + properties.getBodySize());
+        //System.out.println("Body size : " + properties.getBodySize());
     }
 
     public int getHeaderEnd(){

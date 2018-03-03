@@ -96,9 +96,9 @@ public class DynamicRequestFiber implements Runnable {
 
 
                     if (route.matches(pt)) {
-                        System.out.println("Proxy route Matched !");
+                        //System.out.println("Proxy route Matched !");
                         fes.getExecutor().execute(new APIReverseProxy(e.getValue(),bytes,len,socket));
-                        System.out.println("Proxy route Ended !");
+                        //System.out.println("Proxy route Finished !");
                         found = true;
                         break;
                     }

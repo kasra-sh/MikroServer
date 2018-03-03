@@ -39,7 +39,7 @@ public class UploadHandler extends Handler {
         }
         if (conn.getMethod() == HTTPMethod.POST && key.equals("123456")) {
             int fsize = conn.getBodySize();
-            System.out.println(fsize);
+            //System.out.println(fsize);
             if (fsize > 0) {
                 String ct = conn.getHeader("Content-Type");
                 //System.out.println(ct);
