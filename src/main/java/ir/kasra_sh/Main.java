@@ -81,6 +81,7 @@ public class Main {
             //lws.addContextHandler("/404", new ErrorHandler());
             lws.addContextHandler("/uploads", new UploadHandler());
             keyserver.addContextHandler("/genkey*", new RandomKeyHandler());
+            RandomKeyHandler.root = root;
 
             lws.startDynamic(port,200);
             Thread.sleep(100);

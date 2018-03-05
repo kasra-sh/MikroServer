@@ -14,7 +14,7 @@ import java.util.UUID;
 
 public class RandomKeyHandler extends Handler {
 
-    static String root = "/home/blkr/Music/hls/";
+    public static String root = "/home/blkr/Music/hls/";
     static JedisPool jd = new JedisPool("localhost");
     @Suspendable
     @Override
