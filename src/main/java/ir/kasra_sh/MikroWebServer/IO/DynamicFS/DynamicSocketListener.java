@@ -164,7 +164,7 @@ public class DynamicSocketListener extends Thread{
                 }*/
                 socket = null;
                 socket = serverSocket.accept();
-                System.out.println("Accepted "+socket.getInetAddress());
+                //System.out.println("Accepted "+socket.getInetAddress());
                 fes.getForkJoinPool().execute(new DynamicRequestFiber(socket,routes, files, proxies, fes, null));
 
             } catch (IOException e) {

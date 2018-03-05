@@ -15,22 +15,24 @@ import java.util.UUID;
 public class RandomKeyHandler extends Handler {
 
     static String root = "/home/blkr/Music/hls/";
+    static JedisPool jd = new JedisPool("localhost");
     @Suspendable
     @Override
     public int handle(HTTPConnection conn) {
         //String username = conn.getOption("user");
         String resource = conn.getOption("res");
+        //System.out.println(resource);
         if (resource != null) {
             if (Files.exists(Paths.get(root,resource))) {
-                Jedis jd = new Jedis("localhost");
-
+                Jedis j = jd.getResource();
                 //System.out.println(jd.get(username));
                 String uuid = UUID.randomUUID().toString().replaceAll("-", "");
-                jd.set(resource+"_"+uuid,"15");
-                jd.expire(resource+"_"+uuid, 3600);
-                jd.close();
+                j.set(resource+"_"+uuid,"15");
+                j.expire(resource+"_"+uuid, 3600);
+                j.close();
                 conn.writer.getHeader().setStatus(ResponseCode.OK);
                 conn.writer.writeAll(uuid);
+                //System.out.println("RRRRRRRRRRRRRR");
                 return 0;
             }
 

@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.*;
+import java.time.Instant;
+import java.util.Date;
 
 @Suspendable
 public class APIReverseProxy implements Runnable {
@@ -26,9 +28,16 @@ public class APIReverseProxy implements Runnable {
     @Override
     public void run() {
         try {
-            System.out.println("Routing "+sock.getLocalAddress()+" to "+des.getHostName()+":"+des.getPort());
+            StringBuilder p = new StringBuilder();
+            p.append(sock.getInetAddress()).append(" - ");
+            p.append(Date.from(Instant.now()));
+            p.append(" - Routed to ").append(des.getAddress().getHostAddress()).append(":").append(des.getPort());
+            long st = System.currentTimeMillis();
+            //System.out.println("Routing "+sock.getLocalAddress()+" to "+des.getHostName()+":"+des.getPort());
             //System.out.println(new String(dt,0,len));
-            Socket d = new Socket(des.getHostName(),des.getPort());
+            //System.out.println("to "+ des.getAddress().getHostAddress() + ":" + des.getPort());
+            Socket d = new Socket(des.getAddress().getHostAddress(),des.getPort());
+            //System.out.println("Socket Opened !");
             InputStream dis = d.getInputStream();
             OutputStream dos = d.getOutputStream();
             InputStream sis = sock.getInputStream();
@@ -55,6 +64,7 @@ public class APIReverseProxy implements Runnable {
 
                 if (len>0) {
                     //System.out.println("len after : "+len);
+                    //System.out.println(new String(dt,0,len));
                     dos.write(dt,0, len);
                     len = 0;
                     //System.out.println("Wrote to Dest");
@@ -100,11 +110,13 @@ public class APIReverseProxy implements Runnable {
                     break;
                 }
             }
-            System.out.println("Route Done!");
+            p.append(" - ").append(System.currentTimeMillis()-st).append("ms");
+            System.out.println(p);
+            //System.out.println("Route Done!");
 
 
         } catch (Exception e){
-            e.printStackTrace();
+            //e.printStackTrace();
             try { sock.close(); } catch (IOException e1) {}
         } finally {
             try {

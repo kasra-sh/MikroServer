@@ -9,6 +9,7 @@ import ir.kasra_sh.MikroWebServer.IO.LightWebServer;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.net.URLConnection;
 import java.util.Scanner;
 
 public class Main {
@@ -66,19 +67,27 @@ public class Main {
         if (started) return;
         lws = new LightWebServer();
         LightWebServer keyserver = new LightWebServer();
+        LightWebServer errServer = new LightWebServer();
         //LightWebServer proxyServer = new LightWebServer();
         //lws.useTLS("/home/blkr/www/keystore.jks");
         try {
             //proxyServer.addProxyPath("/resources*",new InetSocketAddress("localhost",8080));
             lws.addProxyPath("/genkey*", new InetSocketAddress("localhost",8181));
-            lws.addContextHandler("/404", new ErrorHandler());
+            lws.addProxyPath("/api*", new InetSocketAddress("192.168.1.64", 8001));
+            //lws.addProxyPath("/www/about*", new InetSocketAddress("149.20.63.13", 80));
+            lws.addProxyPath("/404", new InetSocketAddress("localhost", 8282));
+            errServer.addContextHandler("/404", new ErrorHandler());
             lws.addFilePath("/resources*", root);
             //lws.addContextHandler("/404", new ErrorHandler());
             lws.addContextHandler("/uploads", new UploadHandler());
             keyserver.addContextHandler("/genkey*", new RandomKeyHandler());
 
-            lws.startDynamic(port,20);
-            keyserver.start(8181,4);
+            lws.startDynamic(port,200);
+            Thread.sleep(100);
+            keyserver.start(8181,8);
+            Thread.sleep(100);
+            errServer.start(8282,8);
+            Thread.sleep(100);
             //proxyServer.startDynamic(8000,40);
             started = true;
         } catch (IOException e) {
