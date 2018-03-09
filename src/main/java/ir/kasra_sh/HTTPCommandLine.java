@@ -1,8 +1,9 @@
 package ir.kasra_sh;
 
-import ir.kasra_sh.MikroWebServer.HTTPUtils.HTTPConnection;
-import ir.kasra_sh.MikroWebServer.HTTPUtils.ResponseWriter;
-import ir.kasra_sh.MikroWebServer.HTTPUtils.RequestParser;
+import ir.kasra_sh.MikroWebServer.HTTPUtils.HTTPConnectionEx;
+import ir.kasra_sh.MikroWebServer.HTTPUtils.RequestParserEx;
+import ir.kasra_sh.MikroWebServer.HTTPUtils.ResponseWriterEx;
+import ir.kasra_sh.MikroWebServer.HTTPUtils.SocketIO;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -11,8 +12,8 @@ import java.net.Socket;
 
 public class HTTPCommandLine {
     private ServerSocket s;
-    private Socket socket;
-    private RequestParser rp = new RequestParser(null);
+    private SocketIO socket;
+    private RequestParserEx rp;
 
 
     public HTTPCommandLine(int port) throws IOException {
@@ -20,19 +21,18 @@ public class HTTPCommandLine {
         s.bind(new InetSocketAddress(port));
     }
 
-    public HTTPConnection listen() throws IOException {
+    public HTTPConnectionEx listen() throws IOException {
         try {
             socket.close();
         } catch (Exception e){ }
 
-        socket = s.accept();
-        byte[] b = new byte[2048];
-        int l = socket.getInputStream().read(b);
-        int h = rp.parseHeaders(b,0,l);
-        if (h>0) {
-            HTTPConnection c;
+        socket = new SocketIO(s.accept());
+        rp = new RequestParserEx(socket);
+        rp.parseHeader();
+        if (rp.getErrCode() == 0) {
+            HTTPConnectionEx c;
             c = rp.getHTTPConnection();
-            c.writer = new ResponseWriter(socket.getOutputStream());
+            c.writer = new ResponseWriterEx(socket);
             return c;
         } else
             return null;

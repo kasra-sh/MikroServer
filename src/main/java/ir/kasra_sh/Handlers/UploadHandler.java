@@ -1,10 +1,9 @@
 package ir.kasra_sh.Handlers;
 
 import co.paralleluniverse.fibers.Suspendable;
-import ir.kasra_sh.MikroWebServer.HTTPUtils.HTTPConnection;
 import ir.kasra_sh.MikroWebServer.HTTPUtils.HTTPMethod;
 import ir.kasra_sh.MikroWebServer.HTTPUtils.ResponseCode;
-import ir.kasra_sh.MikroWebServer.IO.Handler;
+import ir.kasra_sh.MikroWebServer.IO.HandlerEx;
 import ir.kasra_sh.MikroWebServer.Utils.MimeTypes;
 
 import java.io.IOException;
@@ -13,7 +12,7 @@ import java.nio.file.Paths;
 import java.util.HashSet;
 
 @Suspendable
-public class UploadHandler extends Handler {
+public class UploadHandler extends HandlerEx {
 
     private static HashSet<String> mimes = new HashSet<>();
     private static String root = "/home/blkr/www/uploader/userfiles/";
@@ -29,20 +28,15 @@ public class UploadHandler extends Handler {
 
     @Suspendable
     @Override
-    public int handle(HTTPConnection conn) {
-        //System.out.println(":)");
+    public int handle() {
         String key = conn.getOption("key");
-        //System.out.println("key = "+key);
-        //System.out.println("len = "+conn.getHeader("Content-Length"));
         if (key == null) {
             key="";
         }
         if (conn.getMethod() == HTTPMethod.POST && key.equals("123456")) {
             int fsize = conn.getBodySize();
-            //System.out.println(fsize);
             if (fsize > 0) {
                 String ct = conn.getHeader("Content-Type");
-                //System.out.println(ct);
                 if (mimes.contains(ct)) {
                     conn.getBody();
                     String username = conn.getHeader("x-username");

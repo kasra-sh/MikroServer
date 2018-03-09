@@ -16,7 +16,7 @@ public class ResponseHeader {
     }
 
     public void setStatus(int responseCode){
-        head =  status.replaceFirst("#", ResponseCodeString.codeToString(responseCode));
+        head =  status.replaceFirst("#", ResponseString.codeToString(responseCode));
     }
 
     public void setContentLength(int length){

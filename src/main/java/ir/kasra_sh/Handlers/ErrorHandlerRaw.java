@@ -4,7 +4,9 @@ import ir.kasra_sh.MikroWebServer.HTTPUtils.ResponseCode;
 import ir.kasra_sh.MikroWebServer.IO.HandlerEx;
 import ir.kasra_sh.MikroWebServer.Utils.MimeTypes;
 
-public class ErrorHandler extends HandlerEx {
+import java.io.IOException;
+
+public class ErrorHandlerRaw extends HandlerEx {
     @Override
     public int handle() {
         //conn.writer.getHeader().setStatus(ResponseCode.NOT_FOUND);
@@ -18,13 +20,18 @@ public class ErrorHandler extends HandlerEx {
                 conn.getHeaders().entrySet()) {
             sb.append(e.getKey().toString()).append(":").append(e.getValue()).append("<br>");
         }*/
-        conn.writer.writeResponseCompressed(ResponseCode.NOT_FOUND, html);
+        try {
+            conn.writer.writeResponse(ResponseCode.NOT_FOUND, html);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return -1;
+        }
         //conn.writer.finish();
         return 0;
     }
 
 
-    static final String html = "<!DOCTYPE html>\n" +
+    static String html = "<!DOCTYPE html>\n" +
             "<html>\n" +
             "<head>\n" +
             "  <meta charset=\"utf-8\">\n" +

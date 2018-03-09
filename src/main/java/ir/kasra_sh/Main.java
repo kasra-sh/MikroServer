@@ -1,21 +1,20 @@
 package ir.kasra_sh;
 
 import co.paralleluniverse.fibers.SuspendExecution;
+import com.google.gson.Gson;
 import ir.kasra_sh.Handlers.*;
-import ir.kasra_sh.MikroWebServer.IO.DynamicFS.RandomKeyHandler;
-import ir.kasra_sh.MikroWebServer.HTTPUtils.HTTPConnection;
+import ir.kasra_sh.MikroWebServer.HTTPUtils.HTTPConnectionEx;
 import ir.kasra_sh.MikroWebServer.HTTPUtils.ResponseCode;
-import ir.kasra_sh.MikroWebServer.IO.LightWebServer;
+import ir.kasra_sh.MikroWebServer.IO.LightWebServerEx;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.net.URLConnection;
 import java.util.Scanner;
 
 public class Main {
 
     private static boolean started = false;
-    private static LightWebServer lws;
+    private static LightWebServerEx lws;
 
     public static void main(String[] args) throws IOException {
         Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
@@ -32,7 +31,7 @@ public class Main {
 
         HTTPCommandLine cmd = new HTTPCommandLine(9095);
         while (true) {
-            HTTPConnection hc = cmd.listen();
+            HTTPConnectionEx hc = cmd.listen();
             if (hc.getRoute().startsWith("/start")){
                 //System.out.println("START");
                 if (hc.getOption("port")!=null && !started) {
@@ -65,30 +64,23 @@ public class Main {
 
     private static void start(int port, String root){
         if (started) return;
-        lws = new LightWebServer();
-        LightWebServer keyserver = new LightWebServer();
-        LightWebServer errServer = new LightWebServer();
+        lws = new LightWebServerEx();
+        //LightWebServerEx keyserver = new LightWebServerEx();
+        LightWebServerEx errServer = new LightWebServerEx();
+        LightWebServerEx lx = new LightWebServerEx();
         //LightWebServer proxyServer = new LightWebServer();
         //lws.useTLS("/home/blkr/www/keystore.jks");
         try {
             //proxyServer.addProxyPath("/resources*",new InetSocketAddress("localhost",8080));
-            lws.addProxyPath("/genkey*", new InetSocketAddress("localhost",8181));
-            lws.addProxyPath("/api*", new InetSocketAddress("192.168.1.64", 8001));
-            //lws.addProxyPath("/www/about*", new InetSocketAddress("149.20.63.13", 80));
-            lws.addProxyPath("/404", new InetSocketAddress("localhost", 8282));
+            lx.addFileHandler("/files*",root, new FileServerHandler());
+            RandomKeyHandler.root = root+"/";
+            lx.addContextHandler("/genkey*",new RandomKeyHandler());
+            lx.addProxyPath("/404*", new InetSocketAddress("localhost",8000));
             errServer.addContextHandler("/404", new ErrorHandler());
-            lws.addFilePath("/resources*", root);
-            //lws.addContextHandler("/404", new ErrorHandler());
-            lws.addContextHandler("/uploads", new UploadHandler());
-            keyserver.addContextHandler("/genkey*", new RandomKeyHandler());
-            RandomKeyHandler.root = root;
 
-            lws.startDynamic(port,200);
-            Thread.sleep(100);
-            keyserver.start(8181,8);
-            Thread.sleep(100);
-            errServer.start(8282,8);
-            Thread.sleep(100);
+            lx.start(8080, 100);
+            Thread.sleep(200);
+            errServer.start(8000,10);
             //proxyServer.startDynamic(8000,40);
             started = true;
         } catch (IOException e) {
@@ -103,7 +95,7 @@ public class Main {
     }
 
     private static void stop(){
-        lws.stop();
+        //lws.stop();
         started = false;
     }
 }
