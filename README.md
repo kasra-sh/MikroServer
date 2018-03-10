@@ -16,23 +16,23 @@ MikroServer is a lightweight embeddable java web server, using [Quasar Fibers](h
 
 >Then use gradle to build/run :
 ##### Build :
-#
 ```sh
 $ ./gradlew build
 ```
+
+#### 3. How to Run
+> You can run it using gradle :
 ##### Run :
-#
 ```sh
 $ ./gradlew run
 ```
 
-##### Make Jar
+#### 3. Make Jar
 > You can also make a jar file with all dependencies, however in order to run the jar you have to set _-javaagent_ to the path of quasar-core.jar file.
 ```sh
 $ ./gradlew fatJar
 ```
 ##### Run Jar
-#
 ```sh
 $ java -javaagent:/home/blkr/quasar-core-0.7.9.jar -jar path/to/file.jar
 ```
