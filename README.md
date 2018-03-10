@@ -27,7 +27,7 @@ $ ./gradlew build
 $ ./gradlew run
 ```
 
-#### 3. Make Jar
+#### 4. Make Jar
 > You can also make a jar file with all dependencies, however in order to run the jar you have to set _-javaagent_ to the path of quasar-core.jar file.
 ```sh
 $ ./gradlew fatJar
