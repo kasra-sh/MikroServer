@@ -20,6 +20,7 @@ import java.util.*;
 public class SocketListener extends Thread{
     private ServerSocket serverSocket;
     private SocketReceiver[] socketReceivers;
+    private boolean tls = false;
     private SocketIO socket;
     //private WorkerThread[] workerThreads;
     private int workers=4;
@@ -45,11 +46,16 @@ public class SocketListener extends Thread{
         }
     }
 
-    protected SocketListener(int port, Hashtable<String, Handler> routes, Hashtable<String,AbstractMap.SimpleEntry<Handler, String>> files, String jkeystore) throws IOException {
+    protected SocketListener(int port, Hashtable<String,
+            Handler> routes, Hashtable<String,
+            AbstractMap.SimpleEntry<Handler, String>> files,
+                             Hashtable<String, InetSocketAddress> proxies,
+                             String jkeystore) throws IOException {
         stop = false;
         this.routes = routes.entrySet();
         this.files = files.entrySet();
-        serverSocket = makeSSLServerSocket(port,jkeystore,"PASSWORD");
+        this.proxies = proxies.entrySet();
+        serverSocket = makeSSLServerSocket(port,jkeystore,"1kaskaskas");
         if (serverSocket == null){
             serverSocket = new ServerSocket();
             serverSocket.bind(new InetSocketAddress(port));
@@ -102,12 +108,14 @@ public class SocketListener extends Thread{
             }
 
             serverSocket = sslContext.getServerSocketFactory().createServerSocket(port);
-            ((SSLServerSocket)serverSocket).accept();
+            //((SSLServerSocket)serverSocket).accept();
             ((SSLServerSocket) serverSocket).setEnabledProtocols(new String[]{"TLSv1.2"});
             for (String s: ((SSLServerSocket)serverSocket).getEnabledProtocols()) {
                 System.out.println(s);
             }
             //serverSocket.addTrustMaterial()
+            System.out.println("TLS Enabled !");
+            tls = true;
             return serverSocket;
 
             /*for (String s: ((SSLServerSocket)serverSocket).getEnabledCipherSuites()) {
@@ -148,6 +156,9 @@ public class SocketListener extends Thread{
                 }
 
                 socket = null;
+                if (tls) {
+                    socket = new SocketIO(((SSLServerSocket)serverSocket).accept());
+                } else
                 socket = new SocketIO(serverSocket.accept());
 
                 fes.getForkJoinPool().execute(new RouterFiber(socket,routes, files, proxies));

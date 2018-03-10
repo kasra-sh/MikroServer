@@ -43,7 +43,7 @@ public class LightWebServer {
             sl.setWorkers(parallelism);
         }
         else {
-            sl = new SocketListener(port, routes, filePaths, ks);
+            sl = new SocketListener(port, routes, filePaths, proxies, ks);
             sl.setWorkers(parallelism);
         }
         sl.start();

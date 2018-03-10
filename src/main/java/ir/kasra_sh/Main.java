@@ -65,22 +65,26 @@ public class Main {
         if (started) return;
         lws = new LightWebServer();
         //LightWebServer keyserver = new LightWebServer();
-        LightWebServer errServer = new LightWebServer();
+        //LightWebServer errServer = new LightWebServer();
         LightWebServer lx = new LightWebServer();
+        LightWebServer TLSProxy = new LightWebServer();
         //LightWebServer proxyServer = new LightWebServer();
-        //lws.useTLS("/home/blkr/www/keystore.jks");
+        TLSProxy.useTLS("/home/blkr/www/keystore.jks");
         try {
             //proxyServer.addProxyPath("/resources*",new InetSocketAddress("localhost",8080));
             lx.addFileHandler("/files*",root, new FileServerHandler());
             RandomKeyHandler.root = root+"/";
             lx.addContextHandler("/genkey*",new RandomKeyHandler());
-            lx.addProxyPath("/404*", new InetSocketAddress("localhost",8000));
+            //lx.addProxyPath("/404*", new InetSocketAddress("localhost",8000));
             lx.addContextHandler("/api/user", new GsonTestHandler());
-            errServer.addContextHandler("/404", new ErrorHandler());
+            lx.addContextHandler("/404", new ErrorHandler());
+            TLSProxy.addProxyPath("/*", new InetSocketAddress("localhost", 8001));
 
-            lx.start(8080, 100);
+            lx.start(8001, 100);
+            Thread.sleep(300);
+            TLSProxy.start(8080, 100);
             Thread.sleep(200);
-            errServer.start(8000,10);
+            //errServer.start(8000,10);
             //proxyServer.startDynamic(8000,40);
             started = true;
         } catch (IOException e) {

@@ -10,7 +10,7 @@ public class ErrorHandler extends Handler {
         //conn.writer.getHeader().setStatus(ResponseCode.NOT_FOUND);
         //String rt = conn.getRoute();
         //conn.writer.getHeader().setStatus(ResponseCode.OK);
-        conn.writer.getHeader().setContentType(MimeTypes.Text.HTML);
+        res.getHeader().setContentType(MimeTypes.Text.HTML);
 /*
         StringBuilder sb = new StringBuilder(2048);
         sb.append(rt).append("<br>");
@@ -18,7 +18,7 @@ public class ErrorHandler extends Handler {
                 conn.getHeaders().entrySet()) {
             sb.append(e.getKey().toString()).append(":").append(e.getValue()).append("<br>");
         }*/
-        conn.writer.writeResponseCompressed(ResponseCode.NOT_FOUND, html);
+        res.writeResponseCompressed(ResponseCode.NOT_FOUND, html);
         //conn.writer.finish();
         return 0;
     }
