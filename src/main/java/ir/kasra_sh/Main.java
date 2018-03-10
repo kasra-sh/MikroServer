@@ -75,6 +75,7 @@ public class Main {
             RandomKeyHandler.root = root+"/";
             lx.addContextHandler("/genkey*",new RandomKeyHandler());
             lx.addProxyPath("/404*", new InetSocketAddress("localhost",8000));
+            lx.addContextHandler("/api/user", new GsonTestHandler());
             errServer.addContextHandler("/404", new ErrorHandler());
 
             lx.start(8080, 100);
