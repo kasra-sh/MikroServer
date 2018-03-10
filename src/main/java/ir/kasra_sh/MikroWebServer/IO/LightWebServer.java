@@ -7,24 +7,24 @@ import java.net.InetSocketAddress;
 import java.util.AbstractMap;
 import java.util.Hashtable;
 
-public class LightWebServerEx {
-    private SocketListenerEx sl;
-    private Hashtable<String,HandlerEx> routes = new Hashtable<>();
-    private Hashtable<String,AbstractMap.SimpleEntry<HandlerEx,String>> filePaths = new Hashtable<>();
+public class LightWebServer {
+    private SocketListener sl;
+    private Hashtable<String,Handler> routes = new Hashtable<>();
+    private Hashtable<String,AbstractMap.SimpleEntry<Handler,String>> filePaths = new Hashtable<>();
     private Hashtable<String,InetSocketAddress> proxies = new Hashtable<>();
     private String ks = null;
 
-    public LightWebServerEx() {
+    public LightWebServer() {
     }
 
-    public void addContextHandler(String context, HandlerEx h) throws Exception {
+    public void addContextHandler(String context, Handler h) throws Exception {
         //if (c.isInstance(Handler.class)) {
         h.setContext(context);
         routes.putIfAbsent(context.toLowerCase(), h);
         //}else throw new Exception(c.getName());
     }
 
-    public void addFileHandler(String context, String dir, HandlerEx handler){
+    public void addFileHandler(String context, String dir, Handler handler){
         handler.setContext(context);
         filePaths.putIfAbsent(context.toLowerCase(), new AbstractMap.SimpleEntry(handler,dir));
     }
@@ -39,11 +39,11 @@ public class LightWebServerEx {
 
     public void start(int port, int parallelism) throws IOException, SuspendExecution {
         if (ks == null) {
-            sl = new SocketListenerEx(port, routes, filePaths, proxies);
+            sl = new SocketListener(port, routes, filePaths, proxies);
             sl.setWorkers(parallelism);
         }
         else {
-            sl = new SocketListenerEx(port, routes, filePaths, ks);
+            sl = new SocketListener(port, routes, filePaths, ks);
             sl.setWorkers(parallelism);
         }
         sl.start();

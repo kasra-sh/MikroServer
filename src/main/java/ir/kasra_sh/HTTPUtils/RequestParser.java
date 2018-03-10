@@ -1,12 +1,12 @@
-package ir.kasra_sh.MikroWebServer.HTTPUtils;
+package ir.kasra_sh.HTTPUtils;
 
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
-public class RequestParserEx {
-    private HTTPConnectionEx connection = null;// = new HTTPConnection();
+public class RequestParser {
+    private HTTPConnection connection = null;// = new HTTPConnection();
     private SocketIO is;
     private byte[] h = new byte[1024];
     private int hl = 0;
@@ -20,13 +20,13 @@ public class RequestParserEx {
     private int errCode=0;
     private boolean rh = false;
 
-    public RequestParserEx(SocketIO socketIO){
+    public RequestParser(SocketIO socketIO){
         this.is = socketIO;
     }
 
     public String getRoute() throws IOException {
         //route = is.readLineBytes();
-        connection = new HTTPConnectionEx();
+        connection = new HTTPConnection();
         connection.setRequestParser(this);
         connection.setSocket(is);
         readLine();
@@ -232,7 +232,7 @@ public class RequestParserEx {
         }
     }
 
-    public HTTPConnectionEx getHTTPConnection(){
+    public HTTPConnection getHTTPConnection(){
         return this.connection;
     }
 

@@ -1,9 +1,9 @@
-package ir.kasra_sh.Handlers;
+package ir.kasra_sh.Examples;
 
 import co.paralleluniverse.fibers.Suspendable;
-import ir.kasra_sh.MikroWebServer.HTTPUtils.HTTPMethod;
-import ir.kasra_sh.MikroWebServer.HTTPUtils.ResponseCode;
-import ir.kasra_sh.MikroWebServer.IO.HandlerEx;
+import ir.kasra_sh.HTTPUtils.HTTPMethod;
+import ir.kasra_sh.HTTPUtils.ResponseCode;
+import ir.kasra_sh.MikroWebServer.IO.Handler;
 import ir.kasra_sh.MikroWebServer.Utils.MimeTypes;
 
 import java.io.IOException;
@@ -12,7 +12,7 @@ import java.nio.file.Paths;
 import java.util.HashSet;
 
 @Suspendable
-public class UploadHandler extends HandlerEx {
+public class UploadHandler extends Handler {
 
     private static HashSet<String> mimes = new HashSet<>();
     private static String root = "/home/blkr/www/uploader/userfiles/";

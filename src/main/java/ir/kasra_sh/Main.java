@@ -1,11 +1,10 @@
 package ir.kasra_sh;
 
 import co.paralleluniverse.fibers.SuspendExecution;
-import com.google.gson.Gson;
-import ir.kasra_sh.Handlers.*;
-import ir.kasra_sh.MikroWebServer.HTTPUtils.HTTPConnectionEx;
-import ir.kasra_sh.MikroWebServer.HTTPUtils.ResponseCode;
-import ir.kasra_sh.MikroWebServer.IO.LightWebServerEx;
+import ir.kasra_sh.Examples.*;
+import ir.kasra_sh.HTTPUtils.HTTPConnection;
+import ir.kasra_sh.HTTPUtils.ResponseCode;
+import ir.kasra_sh.MikroWebServer.IO.LightWebServer;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -14,7 +13,7 @@ import java.util.Scanner;
 public class Main {
 
     private static boolean started = false;
-    private static LightWebServerEx lws;
+    private static LightWebServer lws;
 
     public static void main(String[] args) throws IOException {
         Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
@@ -31,7 +30,7 @@ public class Main {
 
         HTTPCommandLine cmd = new HTTPCommandLine(9095);
         while (true) {
-            HTTPConnectionEx hc = cmd.listen();
+            HTTPConnection hc = cmd.listen();
             if (hc.getRoute().startsWith("/start")){
                 //System.out.println("START");
                 if (hc.getOption("port")!=null && !started) {
@@ -64,10 +63,10 @@ public class Main {
 
     private static void start(int port, String root){
         if (started) return;
-        lws = new LightWebServerEx();
-        //LightWebServerEx keyserver = new LightWebServerEx();
-        LightWebServerEx errServer = new LightWebServerEx();
-        LightWebServerEx lx = new LightWebServerEx();
+        lws = new LightWebServer();
+        //LightWebServer keyserver = new LightWebServer();
+        LightWebServer errServer = new LightWebServer();
+        LightWebServer lx = new LightWebServer();
         //LightWebServer proxyServer = new LightWebServer();
         //lws.useTLS("/home/blkr/www/keystore.jks");
         try {

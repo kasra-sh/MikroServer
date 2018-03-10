@@ -1,10 +1,10 @@
-package ir.kasra_sh.MikroWebServer.HTTPUtils;
+package ir.kasra_sh.HTTPUtils;
 
 import java.util.Set;
 
 public class Request {
-    private HTTPConnectionEx conn;
-    public Request(HTTPConnectionEx con) {
+    private HTTPConnection conn;
+    public Request(HTTPConnection con) {
         this.conn = con;
     }
 

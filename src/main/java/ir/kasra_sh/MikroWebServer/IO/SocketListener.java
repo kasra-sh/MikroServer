@@ -3,12 +3,11 @@ package ir.kasra_sh.MikroWebServer.IO;
 
 import co.paralleluniverse.common.monitoring.MonitorType;
 import co.paralleluniverse.fibers.FiberForkJoinScheduler;
-import ir.kasra_sh.MikroWebServer.HTTPUtils.SocketIO;
+import ir.kasra_sh.HTTPUtils.SocketIO;
 
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLServerSocket;
-import javax.swing.text.html.parser.Entity;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -18,22 +17,22 @@ import java.security.cert.CertificateException;
 import java.time.Instant;
 import java.util.*;
 
-public class SocketListenerEx extends Thread{
+public class SocketListener extends Thread{
     private ServerSocket serverSocket;
     private SocketReceiver[] socketReceivers;
     private SocketIO socket;
     //private WorkerThread[] workerThreads;
     private int workers=4;
-    private Set<Map.Entry<String,HandlerEx>> routes;
-    private Set<Map.Entry<String,AbstractMap.SimpleEntry<HandlerEx,String>>> files;
+    private Set<Map.Entry<String,Handler>> routes;
+    private Set<Map.Entry<String,AbstractMap.SimpleEntry<Handler,String>>> files;
     private Set<Map.Entry<String, InetSocketAddress>> proxies;
 
     private boolean stop = false;
 
-    protected SocketListenerEx(int port,
-                               Hashtable<String,HandlerEx> routes,
-                               Hashtable<String,AbstractMap.SimpleEntry<HandlerEx,String>> files,
-                               Hashtable<String, InetSocketAddress> proxies) {
+    protected SocketListener(int port,
+                             Hashtable<String,Handler> routes,
+                             Hashtable<String,AbstractMap.SimpleEntry<Handler,String>> files,
+                             Hashtable<String, InetSocketAddress> proxies) {
         stop = false;
         this.routes = routes.entrySet();
         this.files = files.entrySet();
@@ -46,7 +45,7 @@ public class SocketListenerEx extends Thread{
         }
     }
 
-    protected SocketListenerEx(int port, Hashtable<String, HandlerEx> routes, Hashtable<String,AbstractMap.SimpleEntry<HandlerEx, String>> files, String jkeystore) throws IOException {
+    protected SocketListener(int port, Hashtable<String, Handler> routes, Hashtable<String,AbstractMap.SimpleEntry<Handler, String>> files, String jkeystore) throws IOException {
         stop = false;
         this.routes = routes.entrySet();
         this.files = files.entrySet();
@@ -151,7 +150,7 @@ public class SocketListenerEx extends Thread{
                 socket = null;
                 socket = new SocketIO(serverSocket.accept());
 
-                fes.getForkJoinPool().execute(new RouterFiberEx(socket,routes, files, proxies));
+                fes.getForkJoinPool().execute(new RouterFiber(socket,routes, files, proxies));
 
             } catch (IOException e) {
                 e.printStackTrace();

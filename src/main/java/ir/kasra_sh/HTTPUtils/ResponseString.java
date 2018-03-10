@@ -1,7 +1,4 @@
-package ir.kasra_sh.MikroWebServer.HTTPUtils;
-
-import org.omg.CORBA.PUBLIC_MEMBER;
-import ir.kasra_sh.MikroWebServer.HTTPUtils.ResponseCode;
+package ir.kasra_sh.HTTPUtils;
 
 public enum ResponseString {
     ;

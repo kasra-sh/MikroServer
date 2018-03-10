@@ -1,12 +1,12 @@
-package ir.kasra_sh.Handlers;
+package ir.kasra_sh.Examples;
 
-import ir.kasra_sh.MikroWebServer.HTTPUtils.ResponseCode;
-import ir.kasra_sh.MikroWebServer.IO.HandlerEx;
+import ir.kasra_sh.HTTPUtils.ResponseCode;
+import ir.kasra_sh.MikroWebServer.IO.Handler;
 
 import java.io.IOException;
 
 
-public class GsonTestHandler extends HandlerEx{
+public class GsonTestHandler extends Handler {
     @Override
     public int handle() {
         try {

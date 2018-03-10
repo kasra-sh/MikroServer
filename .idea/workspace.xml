@@ -7,7 +7,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="458739cb-86bb-44be-b020-62eb68b1e8ab" name="Default" comment="">
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/FileCache/FileCache.java" afterPath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/FileCache/DeflateFileCache.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/Handlers/ErrorHandler.java" afterPath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/Examples/ErrorHandler.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/Handlers/ErrorHandlerRaw.java" afterPath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/Examples/ErrorHandlerRaw.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/Handlers/FileServerHandler.java" afterPath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/Examples/FileServerHandler.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/Handlers/GsonTestHandler.java" afterPath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/Examples/GsonTestHandler.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/Handlers/RandomKeyHandler.java" afterPath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/Examples/RandomKeyHandler.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/Handlers/UploadHandler.java" afterPath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/Examples/UploadHandler.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/HTTPUtils/HTTPConnectionEx.java" afterPath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/HTTPUtils/HTTPConnection.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/HTTPUtils/HTTPMethod.java" afterPath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/HTTPUtils/HTTPMethod.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/HTTPUtils/Request.java" afterPath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/HTTPUtils/Request.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/HTTPUtils/RequestParserEx.java" afterPath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/HTTPUtils/RequestParser.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/HTTPUtils/ResponseCode.java" afterPath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/HTTPUtils/ResponseCode.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/HTTPUtils/ResponseHeader.java" afterPath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/HTTPUtils/ResponseHeader.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/HTTPUtils/ResponseString.java" afterPath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/HTTPUtils/ResponseString.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/HTTPUtils/ResponseWriterEx.java" afterPath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/HTTPUtils/ResponseWriter.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/HTTPUtils/SocketIO.java" afterPath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/HTTPUtils/SocketIO.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/IO/HandlerEx.java" afterPath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/IO/Handler.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/IO/LightWebServerEx.java" afterPath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/IO/LightWebServer.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/IO/RouterFiberEx.java" afterPath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/IO/RouterFiber.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/IO/SocketListenerEx.java" afterPath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/IO/SocketListener.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/HTTPCommandLine.java" afterPath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/HTTPCommandLine.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/Main.java" afterPath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/Main.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/IO/Proxy/ReverseProxy.java" afterPath="$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/IO/Proxy/ReverseProxy.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -49,8 +72,8 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="302">
-              <caret line="81" column="28" lean-forward="false" selection-start-line="81" selection-start-column="28" selection-end-line="81" selection-end-column="28" />
+            <state relative-caret-position="313">
+              <caret line="79" column="28" lean-forward="false" selection-start-line="79" selection-start-column="28" selection-end-line="79" selection-end-column="28" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -58,68 +81,67 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RouterFiberEx.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/IO/RouterFiberEx.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-88">
-              <caret line="114" column="30" lean-forward="false" selection-start-line="114" selection-start-column="30" selection-end-line="114" selection-end-column="30" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HandlerEx.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/IO/HandlerEx.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-83">
-              <caret line="22" column="31" lean-forward="false" selection-start-line="22" selection-start-column="31" selection-end-line="22" selection-end-column="31" />
-              <folding>
-                <element signature="method#serveFile#0;class#HandlerEx#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="FileServerHandler.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/Handlers/FileServerHandler.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/Examples/FileServerHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="22">
-              <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+            <state relative-caret-position="269">
+              <caret line="39" column="71" lean-forward="true" selection-start-line="39" selection-start-column="71" selection-end-line="39" selection-end-column="71" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ReverseProxy.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/IO/Proxy/ReverseProxy.java">
+      <file leaf-file-name="DeflateFileCache.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/FileCache/DeflateFileCache.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="462">
-              <caret line="60" column="22" lean-forward="false" selection-start-line="60" selection-start-column="22" selection-end-line="60" selection-end-column="22" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RequestParserEx.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/HTTPUtils/RequestParserEx.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="71">
-              <caret line="28" column="33" lean-forward="false" selection-start-line="28" selection-start-column="33" selection-end-line="28" selection-end-column="33" />
+            <state relative-caret-position="225">
+              <caret line="12" column="13" lean-forward="true" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
               <folding>
-                <element signature="method#parseHead#0;class#RequestParserEx#0" expanded="false" />
-                <element signature="method#setMethod#0;class#RequestParserEx#0" expanded="false" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#1168#1169#0" expanded="true" />
+                <element signature="e#1213#1214#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HTTPConnectionEx.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/HTTPUtils/HTTPConnectionEx.java">
+      <file leaf-file-name="FixedFileQueue.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/FileCache/FixedFileQueue.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="242">
-              <caret line="14" column="60" lean-forward="false" selection-start-line="14" selection-start-column="60" selection-end-line="14" selection-end-column="60" />
+            <state relative-caret-position="203">
+              <caret line="63" column="11" lean-forward="false" selection-start-line="63" selection-start-column="11" selection-end-line="63" selection-end-column="11" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Request.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/HTTPUtils/Request.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-633">
+              <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ResponseWriter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/HTTPUtils/ResponseWriter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="573">
+              <caret line="120" column="33" lean-forward="true" selection-start-line="120" selection-start-column="33" selection-end-line="120" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Handler.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/IO/Handler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="115">
+              <caret line="190" column="10" lean-forward="false" selection-start-line="190" selection-start-column="10" selection-end-line="190" selection-end-column="10" />
               <folding>
-                <element signature="method#getBody#0;class#HTTPConnectionEx#0" expanded="false" />
+                <element signature="method#serveFile#0;class#Handler#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -541,18 +563,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/ir/kasra_sh/DynamicFileServer/RandomKeyHandler.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ir/kasra_sh/DynamicFileServer/DynamicSocketListener.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/IO/DynamicFileServer/DynamicSocketListener.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/IO/Proxy/APIGatewayProxy.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/IO/SocketListener.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/Utils/MimeTypes.java" />
-        <option value="/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/lib/rt.jar!/java/util/HashMap.class" />
-        <option value="$PROJECT_DIR$/src/main/java/ir/kasra_sh/Defaults/UploadHandler.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/HTTPUtils/RequestParser.java" />
         <option value="$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/IO/DynamicFS/DynamicSocketListener.java" />
         <option value="$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/IO/DynamicFS/RandomKeyHandler.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/IO/Handler.java" />
         <option value="$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/HTTPUtils/HTTPConnectionSocketIO.java" />
         <option value="$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/Utils/SocketIO.java" />
         <option value="$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/HTTPUtils/HTTPConnection.java" />
@@ -586,12 +598,22 @@
         <option value="$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/HTTPUtils/Request.java" />
         <option value="$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/IO/SocketListenerEx.java" />
         <option value="$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/IO/LightWebServerEx.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ir/kasra_sh/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/HTTPUtils/RequestParserEx.java" />
         <option value="$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/IO/Proxy/ReverseProxy.java" />
         <option value="$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/HTTPUtils/HTTPConnectionEx.java" />
         <option value="$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/IO/RouterFiberEx.java" />
         <option value="$PROJECT_DIR$/src/main/java/ir/kasra_sh/Handlers/FileServerHandler.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ir/kasra_sh/HTTPUtils/ResponseWriter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ir/kasra_sh/FileCache/FileObject.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ir/kasra_sh/FileCache/FileCache.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ir/kasra_sh/FileCache/FixedWindowQueue.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ir/kasra_sh/HTTPUtils/HTTPConnection.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ir/kasra_sh/FileCache/DeflateFileObject.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ir/kasra_sh/Main.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/IO/Handler.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ir/kasra_sh/FileCache/DeflateFileCache.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ir/kasra_sh/FileCache/FixedFileQueue.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ir/kasra_sh/Examples/FileServerHandler.java" />
       </list>
     </option>
   </component>
@@ -638,81 +660,6 @@
               <item name="MikroServer" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name=".idea" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="MikroServer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MikroServer" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MikroServer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MikroServer" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-            </path>
-            <path>
-              <item name="MikroServer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MikroServer" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MikroServer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MikroServer" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="kasra_sh" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MikroServer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MikroServer" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="kasra_sh" type="462c0819:PsiDirectoryNode" />
-              <item name="Handlers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MikroServer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MikroServer" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="kasra_sh" type="462c0819:PsiDirectoryNode" />
-              <item name="MikroWebServer" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MikroServer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MikroServer" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="kasra_sh" type="462c0819:PsiDirectoryNode" />
-              <item name="MikroWebServer" type="462c0819:PsiDirectoryNode" />
-              <item name="HTTPUtils" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MikroServer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MikroServer" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="kasra_sh" type="462c0819:PsiDirectoryNode" />
-              <item name="MikroWebServer" type="462c0819:PsiDirectoryNode" />
-              <item name="IO" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MikroServer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MikroServer" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="kasra_sh" type="462c0819:PsiDirectoryNode" />
-              <item name="MikroWebServer" type="462c0819:PsiDirectoryNode" />
-              <item name="IO" type="462c0819:PsiDirectoryNode" />
-              <item name="Proxy" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -730,10 +677,11 @@
     <property name="last_opened_file_path" value="$USER_HOME$/.gradle/caches/jars-3/0bd5cb532246c240be9e5230633d45b1/gson-2.2.4.jar!/" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java/ir/kasra_sh/FileCache" />
       <recent name="$PROJECT_DIR$/lib" />
-      <recent name="$PROJECT_DIR$/src/main" />
-      <recent name="$PROJECT_DIR$/src/main/java/ir/kasra_sh" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/src/main/java" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="ir.kasra_sh.MikroWebServer.HTTPUtils" />
@@ -742,10 +690,10 @@
       <recent name="ir.kasra_sh.MikroWebServer.IO.DynamicFS" />
       <recent name="ir.kasra_sh.MikroWebServer.Utils" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
+    <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/lib" />
-      <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/src/main/java" />
+      <recent name="$PROJECT_DIR$/src/main" />
+      <recent name="$PROJECT_DIR$/src/main/java/ir/kasra_sh" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -769,7 +717,7 @@
         </pattern>
       </extension>
       <option name="MAIN_CLASS_NAME" value="ir.kasra_sh.Main" />
-      <option name="VM_PARAMETERS" value="-Xmx300m -XX:+UseG1GC -javaagent:$USER_HOME$/quasar-core-0.7.9.jar -Dco.paralleluniverse.fibers.detectRunawayFibers=false" />
+      <option name="VM_PARAMETERS" value="-Xmx300m -javaagent:$USER_HOME$/quasar-core-0.7.9.jar -Dco.paralleluniverse.fibers.detectRunawayFibers=false" />
       <option name="PROGRAM_PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -930,7 +878,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="170" y="144" width="1920" height="1028" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -945,7 +892,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32896304" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2064865" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2064865" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32896304" sideWeight="0.49783784" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32972974" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1004,22 +951,12 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar:///usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/lib/rt.jar!/java/net/URLDecoder.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/HTTPUtils/RequestParser.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/HTTPUtils/ResponseWriter.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/IO/RequestFiber2.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/IO/RequestFiber.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/IO/DynamicFS/DynamicRequestFiber.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/IO/DynamicFS/DynamicFileServerFiber.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/IO/StaticFS/FileServerFiber.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/IO/StaticFS/FileServerFiber2.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/HTTPUtils/SocketIO.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/HTTPUtils/SocketIO.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-347">
           <caret line="119" column="14" lean-forward="false" selection-start-line="119" selection-start-column="14" selection-end-line="119" selection-end-column="14" />
@@ -1037,7 +974,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/IO/DynamicFS/DynamicRequestFiberEx.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/IO/DynamicFS/DynamicSocketListenerEx.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/Handlers/EchoHandler.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/Handlers/GsonTestHandler.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/Examples/GsonTestHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="110">
           <caret line="9" column="46" lean-forward="false" selection-start-line="9" selection-start-column="46" selection-end-line="9" selection-end-column="46" />
@@ -1048,7 +985,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/Handlers/Proxifier.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/Handlers/ProxyHandler.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/IO/ResourceHandler.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/Handlers/ErrorHandlerRaw.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/Examples/ErrorHandlerRaw.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="88">
           <caret line="8" column="40" lean-forward="false" selection-start-line="8" selection-start-column="40" selection-end-line="8" selection-end-column="40" />
@@ -1078,18 +1015,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/HTTPUtils/ResponseHeader.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/HTTPUtils/ResponseHeader.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="29" column="16" lean-forward="false" selection-start-line="29" selection-start-column="16" selection-end-line="29" selection-end-column="16" />
           <folding>
-            <element signature="e#890#891#0" expanded="false" />
-            <element signature="e#946#947#0" expanded="false" />
+            <element signature="e#875#876#0" expanded="false" />
+            <element signature="e#931#932#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/HTTPUtils/ResponseCode.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/HTTPUtils/ResponseCode.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="181">
           <caret line="23" column="28" lean-forward="false" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
@@ -1097,7 +1034,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/Handlers/UploadHandler.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/Examples/UploadHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="638">
           <caret line="38" column="59" lean-forward="false" selection-start-line="38" selection-start-column="59" selection-end-line="38" selection-end-column="59" />
@@ -1113,7 +1050,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/HTTPUtils/ResponseString.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/HTTPUtils/ResponseString.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="88">
           <caret line="5" column="12" lean-forward="false" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
@@ -1121,18 +1058,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/Handlers/RandomKeyHandler.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/Examples/RandomKeyHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="291">
           <caret line="29" column="18" lean-forward="false" selection-start-line="29" selection-start-column="18" selection-end-line="29" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/HTTPUtils/ResponseWriterEx.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="76" column="0" lean-forward="false" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1177,7 +1106,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/Handlers/ErrorHandler.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/Examples/ErrorHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="324">
           <caret line="18" column="40" lean-forward="true" selection-start-line="18" selection-start-column="40" selection-end-line="18" selection-end-column="40" />
@@ -1185,67 +1114,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/HTTPUtils/Request.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
-          <caret line="61" column="35" lean-forward="true" selection-start-line="61" selection-start-column="35" selection-end-line="61" selection-end-column="35" />
-          <folding>
-            <element signature="e#169#170#0" expanded="true" />
-            <element signature="e#200#201#0" expanded="true" />
-            <element signature="e#237#238#0" expanded="true" />
-            <element signature="e#276#277#0" expanded="true" />
-            <element signature="e#308#309#0" expanded="true" />
-            <element signature="e#346#347#0" expanded="true" />
-            <element signature="e#377#378#0" expanded="true" />
-            <element signature="e#414#415#0" expanded="true" />
-            <element signature="e#449#450#0" expanded="true" />
-            <element signature="e#490#491#0" expanded="true" />
-            <element signature="e#997#998#0" expanded="true" />
-            <element signature="e#1059#1060#0" expanded="true" />
-            <element signature="e#1364#1365#0" expanded="true" />
-            <element signature="e#1426#1427#0" expanded="true" />
-            <element signature="e#1539#1540#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/IO/HandlerEx.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-83">
-          <caret line="22" column="31" lean-forward="false" selection-start-line="22" selection-start-column="31" selection-end-line="22" selection-end-column="31" />
-          <folding>
-            <element signature="method#serveFile#0;class#HandlerEx#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/IO/LightWebServerEx.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/IO/LightWebServer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="242">
           <caret line="41" column="70" lean-forward="false" selection-start-line="41" selection-start-column="70" selection-end-line="41" selection-end-column="70" />
           <folding>
-            <marker date="1520516549584" expanded="true" signature="871:1084" ph="..." />
+            <marker date="1520605581287" expanded="true" signature="859:1070" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/IO/SocketListenerEx.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/IO/SocketListener.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="192">
           <caret line="39" column="42" lean-forward="false" selection-start-line="39" selection-start-column="42" selection-end-line="39" selection-end-column="42" />
           <folding>
-            <element signature="method#SocketListenerEx#1;class#SocketListenerEx#0" expanded="false" />
-            <element signature="method#makeSSLServerSocket#0;class#SocketListenerEx#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="302">
-          <caret line="81" column="28" lean-forward="false" selection-start-line="81" selection-start-column="28" selection-end-line="81" selection-end-column="28" />
-          <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="method#SocketListener#1;class#SocketListener#0" expanded="false" />
+            <element signature="method#makeSSLServerSocket#0;class#SocketListener#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1261,6 +1146,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/HTTPUtils/RequestParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="92" column="12" lean-forward="false" selection-start-line="92" selection-start-column="12" selection-end-line="92" selection-end-column="12" />
+          <folding>
+            <element signature="method#parseHead#0;class#RequestParser#0" expanded="false" />
+            <element signature="method#setMethod#0;class#RequestParser#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/IO/Proxy/ReverseProxy.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="462">
@@ -1269,39 +1165,102 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/HTTPUtils/RequestParserEx.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/FileCache/FixedWindowQueue.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="71">
-          <caret line="28" column="33" lean-forward="false" selection-start-line="28" selection-start-column="33" selection-end-line="28" selection-end-column="33" />
-          <folding>
-            <element signature="method#parseHead#0;class#RequestParserEx#0" expanded="false" />
-            <element signature="method#setMethod#0;class#RequestParserEx#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/HTTPUtils/HTTPConnectionEx.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="14" column="60" lean-forward="false" selection-start-line="14" selection-start-column="60" selection-end-line="14" selection-end-column="60" />
-          <folding>
-            <element signature="method#getBody#0;class#HTTPConnectionEx#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/IO/RouterFiberEx.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-88">
-          <caret line="114" column="30" lean-forward="false" selection-start-line="114" selection-start-column="30" selection-end-line="114" selection-end-column="30" />
+        <state relative-caret-position="683">
+          <caret line="55" column="5" lean-forward="true" selection-start-line="3" selection-start-column="4" selection-end-line="55" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/Handlers/FileServerHandler.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/IO/RouterFiber.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        <state relative-caret-position="-215">
+          <caret line="113" column="30" lean-forward="false" selection-start-line="113" selection-start-column="30" selection-end-line="113" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/HTTPUtils/ResponseWriter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="573">
+          <caret line="120" column="33" lean-forward="true" selection-start-line="120" selection-start-column="33" selection-end-line="120" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/HTTPUtils/HTTPConnection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1161">
+          <caret line="23" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding>
+            <element signature="method#getBody#0;class#HTTPConnection#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/HTTPUtils/Request.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-633">
+          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/FileCache/DeflateFileObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="302">
+          <caret line="39" column="14" lean-forward="false" selection-start-line="39" selection-start-column="14" selection-end-line="39" selection-end-column="14" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="313">
+          <caret line="79" column="28" lean-forward="false" selection-start-line="79" selection-start-column="28" selection-end-line="79" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/MikroWebServer/IO/Handler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="190" column="10" lean-forward="false" selection-start-line="190" selection-start-column="10" selection-end-line="190" selection-end-column="10" />
+          <folding>
+            <element signature="method#serveFile#0;class#Handler#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/FileCache/FixedFileQueue.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="63" column="11" lean-forward="false" selection-start-line="63" selection-start-column="11" selection-end-line="63" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/FileCache/DeflateFileCache.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="12" column="13" lean-forward="true" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1168#1169#0" expanded="true" />
+            <element signature="e#1213#1214#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ir/kasra_sh/Examples/FileServerHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="269">
+          <caret line="39" column="71" lean-forward="true" selection-start-line="39" selection-start-column="71" selection-end-line="39" selection-end-column="71" />
           <folding />
         </state>
       </provider>

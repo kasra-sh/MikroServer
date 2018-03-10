@@ -1,4 +1,4 @@
-package ir.kasra_sh.MikroWebServer.HTTPUtils;
+package ir.kasra_sh.HTTPUtils;
 
 import co.paralleluniverse.fibers.Suspendable;
 
@@ -6,20 +6,21 @@ import java.io.IOException;
 import java.util.Properties;
 
 @Suspendable
-public class HTTPConnectionEx {
+public class HTTPConnection {
     private Properties p = new Properties();
     private Properties o = new Properties();
     private HTTPMethod method;
     private String route;
     private SocketIO socket;
     private StringBuilder rawHeader = new StringBuilder(2048);
-    public ResponseWriterEx writer;
+    public ResponseWriter writer;
     private int headerSize = 0;
     private int bodySize = 0;
     public byte[] body = null;
-    private RequestParserEx requestParser;
+    private RequestParser requestParser;
     private String filePath = null;
     private String context;
+    public Request req = new Request(this);
 
 
     public void setSocket(SocketIO socket){
@@ -114,7 +115,7 @@ public class HTTPConnectionEx {
         return null;
     }
 
-    public void setRequestParser(RequestParserEx requestParser) {
+    public void setRequestParser(RequestParser requestParser) {
         this.requestParser = requestParser;
     }
 

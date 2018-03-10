@@ -1,4 +1,4 @@
-package ir.kasra_sh.MikroWebServer.HTTPUtils;
+package ir.kasra_sh.HTTPUtils;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -6,13 +6,13 @@ import java.io.IOException;
 import java.util.zip.Deflater;
 import java.util.zip.GZIPOutputStream;
 
-public class ResponseWriterEx {
+public class ResponseWriter {
     private ResponseHeader header = new ResponseHeader();
     private String h;
     boolean rh=false;
     private SocketIO socketIO;
 
-    public ResponseWriterEx(SocketIO socketIO) {
+    public ResponseWriter(SocketIO socketIO) {
         this.socketIO = socketIO;
     }
 
@@ -159,7 +159,7 @@ public class ResponseWriterEx {
         } catch (IOException e) { }
     }
 
-    private static byte[] compress(byte[] data) throws IOException {
+    private byte[] compress(byte[] data) throws IOException {
         Deflater deflater = new Deflater();
         deflater.setInput(data);
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream(data.length);
@@ -174,25 +174,4 @@ public class ResponseWriterEx {
         return outputStream.toByteArray();
     }
 
-    private byte[] compressGzipFile(byte[] b) {
-        try {
-            ByteArrayInputStream bis = new ByteArrayInputStream(b);
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            GZIPOutputStream gzipOS = new GZIPOutputStream(bos);
-            byte[] buffer = new byte[512];
-            int len;
-            while((len=bis.read(buffer)) != -1){
-                gzipOS.write(buffer, 0, len);
-            }
-            //close resources
-            gzipOS.close();
-            bis.close();
-            bos.close();
-            return bos.toByteArray();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-
-    }
 }

@@ -1,9 +1,9 @@
-package ir.kasra_sh.Handlers;
+package ir.kasra_sh.Examples;
 
 import co.paralleluniverse.fibers.Suspendable;
-import ir.kasra_sh.MikroWebServer.HTTPUtils.ResponseCode;
-import ir.kasra_sh.MikroWebServer.HTTPUtils.ResponseString;
-import ir.kasra_sh.MikroWebServer.IO.HandlerEx;
+import ir.kasra_sh.HTTPUtils.ResponseCode;
+import ir.kasra_sh.HTTPUtils.ResponseString;
+import ir.kasra_sh.MikroWebServer.IO.Handler;
 import ir.kasra_sh.MikroWebServer.Utils.Validator;
 import redis.clients.jedis.Jedis;
 
@@ -13,7 +13,7 @@ import java.nio.file.Paths;
 import java.util.UUID;
 
 
-public class RandomKeyHandler extends HandlerEx {
+public class RandomKeyHandler extends Handler {
 
     public static String root;
     private Jedis jd;

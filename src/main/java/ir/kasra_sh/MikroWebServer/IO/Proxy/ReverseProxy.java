@@ -1,8 +1,8 @@
 package ir.kasra_sh.MikroWebServer.IO.Proxy;
 
 import co.paralleluniverse.fibers.Suspendable;
-import ir.kasra_sh.MikroWebServer.HTTPUtils.HTTPConnectionEx;
-import ir.kasra_sh.MikroWebServer.HTTPUtils.SocketIO;
+import ir.kasra_sh.HTTPUtils.HTTPConnection;
+import ir.kasra_sh.HTTPUtils.SocketIO;
 
 import java.net.*;
 import java.time.Instant;
@@ -11,12 +11,12 @@ import java.util.Date;
 @Suspendable
 public class ReverseProxy implements Runnable {
 
-    private HTTPConnectionEx con;
+    private HTTPConnection con;
     private byte[] buff = new byte[4096];
     private InetSocketAddress des;
     private int len;
 
-    public ReverseProxy(InetSocketAddress dest, HTTPConnectionEx conn){
+    public ReverseProxy(InetSocketAddress dest, HTTPConnection conn){
         con = conn;
         des = dest;
     }

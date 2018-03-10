@@ -1,12 +1,12 @@
-package ir.kasra_sh.Handlers;
+package ir.kasra_sh.Examples;
 
-import ir.kasra_sh.MikroWebServer.HTTPUtils.ResponseCode;
-import ir.kasra_sh.MikroWebServer.IO.HandlerEx;
+import ir.kasra_sh.HTTPUtils.ResponseCode;
+import ir.kasra_sh.MikroWebServer.IO.Handler;
 import ir.kasra_sh.MikroWebServer.Utils.MimeTypes;
 
 import java.io.IOException;
 
-public class ErrorHandlerRaw extends HandlerEx {
+public class ErrorHandlerRaw extends Handler {
     @Override
     public int handle() {
         //conn.writer.getHeader().setStatus(ResponseCode.NOT_FOUND);

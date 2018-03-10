@@ -1,8 +1,7 @@
 package ir.kasra_sh.MikroWebServer.IO;
 
-import co.paralleluniverse.fibers.FiberForkJoinScheduler;
 import co.paralleluniverse.fibers.Suspendable;
-import ir.kasra_sh.MikroWebServer.HTTPUtils.*;
+import ir.kasra_sh.HTTPUtils.*;
 import ir.kasra_sh.MikroWebServer.IO.Proxy.ReverseProxy;
 import ir.kasra_sh.MikroWebServer.Utils.MimeTypes;
 
@@ -13,21 +12,21 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 
-public class RouterFiberEx implements Runnable {
+public class RouterFiber implements Runnable {
 
     private SocketIO socket;
-    private RequestParserEx requestParser;
-    private HandlerEx handler;
-    private Set<Entry<String,HandlerEx>> routes;
-    private Set<Entry<String,AbstractMap.SimpleEntry<HandlerEx,String>>> files;
+    private RequestParser requestParser;
+    private Handler handler;
+    private Set<Entry<String,Handler>> routes;
+    private Set<Entry<String,AbstractMap.SimpleEntry<Handler,String>>> files;
     private Set<Entry<String, InetSocketAddress>> proxies;
-    private HTTPConnectionEx connection;
+    private HTTPConnection connection;
 
 
-    public RouterFiberEx(SocketIO s,
-                         Set<Entry<String,HandlerEx>> routes,
-                         Set<Entry<String,AbstractMap.SimpleEntry<HandlerEx,String>>> files,
-                         Set<Entry<String, InetSocketAddress>> proxies) throws IOException {
+    public RouterFiber(SocketIO s,
+                       Set<Entry<String,Handler>> routes,
+                       Set<Entry<String,AbstractMap.SimpleEntry<Handler,String>>> files,
+                       Set<Entry<String, InetSocketAddress>> proxies) throws IOException {
         this.proxies = proxies;
         this.routes = routes;
         this.files = files;
@@ -41,7 +40,7 @@ public class RouterFiberEx implements Runnable {
         try {
             try {
                 boolean found = false;
-                requestParser = new RequestParserEx(socket);
+                requestParser = new RequestParser(socket);
                 String route = requestParser.getRoute();
                 //System.out.println("Route = "+route);
 
@@ -50,7 +49,7 @@ public class RouterFiberEx implements Runnable {
                     return;
                 }
 
-                for (Entry<String, HandlerEx> e:
+                for (Entry<String, Handler> e:
                         routes) {
                     String pt=e.getKey();
                     if (e.getKey().endsWith("*")) {
@@ -64,7 +63,7 @@ public class RouterFiberEx implements Runnable {
                         //System.out.println("Context : "+handler.getContext());
                         requestParser.parseHeader();
                         connection = requestParser.getHTTPConnection();
-                        connection.writer = new ResponseWriterEx(socket);
+                        connection.writer = new ResponseWriter(socket);
                         if (requestParser.getErrCode()!=0) {
                             sendErrorCode(requestParser.getErrCode(),connection);
                             break;
@@ -76,7 +75,7 @@ public class RouterFiberEx implements Runnable {
                     }
                 }
                 if (!found) {
-                    for (Entry<String, AbstractMap.SimpleEntry<HandlerEx,String>> e :
+                    for (Entry<String, AbstractMap.SimpleEntry<Handler,String>> e :
                             files) {
                         String pt = e.getKey();
                         if (e.getKey().endsWith("*")) {
@@ -89,7 +88,7 @@ public class RouterFiberEx implements Runnable {
                             requestParser.parseHeader();
                             connection = requestParser.getHTTPConnection();
                             connection.setFilePath(e.getValue().getValue());
-                            connection.writer = new ResponseWriterEx(socket);
+                            connection.writer = new ResponseWriter(socket);
                             handler.setConnection(connection);
                             if (requestParser.getErrCode()!=0) {
                                 sendErrorCode(requestParser.getErrCode(),connection);
@@ -119,7 +118,7 @@ public class RouterFiberEx implements Runnable {
                             connection = requestParser.getHTTPConnection();
                             connection.setContext(e.getKey().replace("*",""));
                             //connection.setFilePath(e.getValue().getValue());
-                            connection.writer = new ResponseWriterEx(socket);
+                            connection.writer = new ResponseWriter(socket);
                             //handler.setConnection(connection);
                             if (requestParser.getErrCode()!=0) {
                                 sendErrorCode(requestParser.getErrCode(),connection);
@@ -137,7 +136,7 @@ public class RouterFiberEx implements Runnable {
                     //handler = routes.get("/404");
                     requestParser.parseHeader();
                     connection = requestParser.getHTTPConnection();
-                    connection.writer = new ResponseWriterEx(socket);
+                    connection.writer = new ResponseWriter(socket);
                     connection.writer.getHeader().setStatus(ResponseCode.TEMPORARY_REDIRECT);
                     connection.writer.getHeader().setProperty("Location","/404");
                     connection.writer.writeHeader();
@@ -167,7 +166,7 @@ public class RouterFiberEx implements Runnable {
     @Suspendable
     private void sendError(){
         //handler = routes.get("/404");
-        connection.writer = new ResponseWriterEx(socket);
+        connection.writer = new ResponseWriter(socket);
         connection.writer.getHeader().setStatus(ResponseCode.BAD_REQUEST);
         connection.writer.getHeader().setContentType(MimeTypes.Text.TXT);
         connection.writer.writeAll("Bad Request !");
@@ -177,7 +176,7 @@ public class RouterFiberEx implements Runnable {
         ServerStats.decActive();
     }
 
-    private void sendErrorCode(int code, HTTPConnectionEx conn) {
+    private void sendErrorCode(int code, HTTPConnection conn) {
         try {
             conn.writer.writeResponse(code, "");
         } catch (IOException e) {

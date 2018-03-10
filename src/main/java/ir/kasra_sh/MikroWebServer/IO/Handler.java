@@ -1,27 +1,26 @@
 package ir.kasra_sh.MikroWebServer.IO;
 
 import co.paralleluniverse.fibers.Suspendable;
-import ir.kasra_sh.MikroWebServer.HTTPUtils.*;
+import ir.kasra_sh.HTTPUtils.*;
 import ir.kasra_sh.MikroWebServer.Utils.MimeTypes;
 
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 @Suspendable
-public abstract class HandlerEx {
+public abstract class Handler {
     protected String CONTEXT;
-    protected HTTPConnectionEx conn;
-    protected ResponseWriterEx res;
+    protected HTTPConnection conn;
+    protected ResponseWriter res;
     protected Request req;
 
-    public void setConnection(HTTPConnectionEx conn){
+    public void setConnection(HTTPConnection conn){
         this.conn = conn;
         this.conn.setContext(CONTEXT);
         this.res = conn.writer;
-        this.req = new Request(conn);
+        this.req = conn.req;
     }
 
     public void setContext(String c){
@@ -183,6 +182,100 @@ public abstract class HandlerEx {
             //System.out.println();
             return ResponseCode.NOT_FOUND;
         }
+    }
+
+    @Suspendable
+    protected int sendFileFromStream(InputStream in, String name, long size, boolean deflate) throws Exception {
+        //System.out.println("sending");
+        String ext = name.substring(name.lastIndexOf(".")+1);
+        //System.out.println(ext);
+
+        conn.writer.getHeader().setContentType(MimeTypes.byExt(ext));
+        conn.writer.getHeader().setStatus(ResponseCode.OK);
+        conn.writer.getHeader().setProperty("Accept-Ranges","bytes");
+        long sz = size;
+        if (conn.getMethod() == HTTPMethod.HEAD){
+            conn.writer.getHeader().setContentLength((int)sz);
+            conn.writer.writeHeader();
+            conn.writer.finish();
+            return 0;
+        }
+
+        if (deflate) {
+            conn.writer.getHeader().setProperty("Content-Encoding","deflate");
+        }
+        String range = conn.getHeader("Range");
+        int[] rng=null;
+        if (range!=null){
+            if (range.matches("\\s*bytes=\\s*([\\d]+)\\-([\\d]+)\\s*")){
+                String[] r = range.replaceAll("\\s*bytes=","").split("-");
+                rng = new int[]{Integer.valueOf(r[0].trim()),Integer.valueOf(r[1].trim())};
+                System.out.println("Range : "+rng[0]+","+rng[1]);
+            } else if (range.matches("\\s*bytes=\\d+-\\s*")) {
+                String[] r = range.replaceAll("\\s*bytes=","").split("-");
+                rng = new int[]{Integer.valueOf(r[0].trim()),(int)sz-1};
+                System.out.println("Range : "+rng[0]+","+rng[1]);
+            }
+            else throw new Exception("Range error!");
+        }
+
+        int r=0;
+        //conn.writer.getHeader().setContentLength((int)sz);
+        //conn.writer.writeHeader();
+        byte[] buf;
+        int rsz=0;
+        if (rng != null) {
+            if (rng[0]>rng[1] || rng[1]>sz) throw new Exception("Range error !");
+            rsz = rng[1] - rng[0];
+            if (rsz == 0) rsz = 1;
+            conn.writer.getHeader().setStatus(ResponseCode.PARTIAL_CONTENT);
+            conn.writer.getHeader().setProperty("Content-Range","bytes "+rng[0]+"-"+rng[1]+"/"+sz);
+            conn.writer.getHeader().setContentLength(rsz);
+            int rem = rsz;
+            if (rsz>204800) {
+                buf = new byte[204800];
+            } else buf = new byte[rsz+1];
+            in.skip(rng[0]);
+            conn.writer.writeHeader();
+            while (true){
+                if (rem<=buf.length) {
+                    r = in.read(buf, 0, rem);
+                    rem-=r;
+                }
+                else {
+                    r = in.read(buf);
+                    rem-=r;
+                }
+                if (r>0) {
+                    conn.writer.write(buf,0,r);
+                } else break;
+                if (r<buf.length) break;
+            }
+            in.close();
+            conn.writer.finish();
+            return 0;
+
+        } else {
+            conn.writer.getHeader().setStatus(ResponseCode.OK);
+            conn.writer.getHeader().setContentLength((int)sz);
+            if (sz>204800) {
+                buf = new byte[204800];
+            } else buf = new byte[(int)sz];
+            conn.writer.writeHeader();
+            while (true){
+                r = in.read(buf);
+                if (r>0) {
+                    conn.writer.write(buf,0,r);
+                } else break;
+                if (r<buf.length) break;
+            }
+            in.close();
+            conn.writer.finish();
+            conn.socketIO().close();
+            return 0;
+        }
+
+                //ServerStats.addProc(System.nanoTime()-t);
     }
 
     protected void sendResponse(int resposeCode, String text) {

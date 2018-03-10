@@ -1,4 +1,4 @@
-package ir.kasra_sh.MikroWebServer.HTTPUtils;
+package ir.kasra_sh.HTTPUtils;
 
 import ir.kasra_sh.MikroWebServer.Utils.MimeTypes;
 
