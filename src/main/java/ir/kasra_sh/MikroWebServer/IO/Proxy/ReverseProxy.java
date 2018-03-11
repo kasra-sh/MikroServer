@@ -2,7 +2,7 @@ package ir.kasra_sh.MikroWebServer.IO.Proxy;
 
 import co.paralleluniverse.fibers.Suspendable;
 import ir.kasra_sh.HTTPUtils.HTTPConnection;
-import ir.kasra_sh.HTTPUtils.SocketIO;
+import ir.kasra_sh.HTTPUtils.KSocket;
 
 import java.net.*;
 import java.time.Instant;
@@ -33,8 +33,8 @@ public class ReverseProxy implements Runnable {
             //System.out.println("Routing "+sock.getLocalAddress()+" to "+des.getHostName()+":"+des.getPort());
             //System.out.println(new String(dt,0,len));
             //System.out.println("to "+ des.getAddress().getHostAddress() + ":" + des.getPort());
-            SocketIO d = new SocketIO(new Socket(des.getAddress().getHostAddress(),des.getPort()));
-            //System.out.println("SocketIO Opened !");
+            KSocket d = new KSocket(new Socket(des.getAddress().getHostAddress(),des.getPort()));
+            //System.out.println("KSocket Opened !");
             ////////////////////////
             int len = 0;
             try {

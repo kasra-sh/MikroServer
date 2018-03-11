@@ -7,7 +7,7 @@ import java.net.URLDecoder;
 
 public class RequestParser {
     private HTTPConnection connection = null;// = new HTTPConnection();
-    private SocketIO is;
+    private KSocket is;
     private byte[] h = new byte[1024];
     private int hl = 0;
     private StringBuilder mtd = new StringBuilder(7);
@@ -20,8 +20,8 @@ public class RequestParser {
     private int errCode=0;
     private boolean rh = false;
 
-    public RequestParser(SocketIO socketIO){
-        this.is = socketIO;
+    public RequestParser(KSocket KSocket){
+        this.is = KSocket;
     }
 
     public String getRoute() throws IOException {

@@ -3,7 +3,7 @@ package ir.kasra_sh.MikroWebServer.IO;
 
 import co.paralleluniverse.common.monitoring.MonitorType;
 import co.paralleluniverse.fibers.FiberForkJoinScheduler;
-import ir.kasra_sh.HTTPUtils.SocketIO;
+import ir.kasra_sh.HTTPUtils.KSocket;
 
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
@@ -16,12 +16,14 @@ import java.security.*;
 import java.security.cert.CertificateException;
 import java.time.Instant;
 import java.util.*;
+import java.util.concurrent.ForkJoinPool;
 
 public class SocketListener extends Thread{
     private ServerSocket serverSocket;
     private SocketReceiver[] socketReceivers;
     private boolean tls = false;
-    private SocketIO socket;
+    private KSocket socket;
+    private boolean useFibers = true;
     //private WorkerThread[] workerThreads;
     private int workers=4;
     private Set<Map.Entry<String,Handler>> routes;
@@ -60,6 +62,10 @@ public class SocketListener extends Thread{
             serverSocket = new ServerSocket();
             serverSocket.bind(new InetSocketAddress(port));
         }
+    }
+
+    protected void setUseFibers(boolean uf) {
+        useFibers = uf;
     }
 
     private ServerSocket makeSSLServerSocket(int port, String jkeystore, String psw){
@@ -140,9 +146,14 @@ public class SocketListener extends Thread{
         long ctime, ptime = 0;
         int csv, psv=0;
 
-        FiberForkJoinScheduler fes =
-                new FiberForkJoinScheduler("sldef"+new Random(Date.from(Instant.now()).getTime()).nextLong(),workers,null, MonitorType.JMX, false);
+        FiberForkJoinScheduler fes = null;
 
+        ForkJoinPool forkJoinPool= null;
+        if (!useFibers) {
+            forkJoinPool = new ForkJoinPool(workers);
+        } else {
+            fes = new FiberForkJoinScheduler("sldef"+new Random(Date.from(Instant.now()).getTime()).nextLong(),workers,null, MonitorType.JMX, false);
+        }
 
         //FiberExecutorScheduler fes = new FiberExecutorScheduler("Sch", Executors.newWorkStealingPool(1));
 
@@ -157,11 +168,16 @@ public class SocketListener extends Thread{
 
                 socket = null;
                 if (tls) {
-                    socket = new SocketIO(((SSLServerSocket)serverSocket).accept());
+                    socket = new KSocket(((SSLServerSocket)serverSocket).accept());
                 } else
-                socket = new SocketIO(serverSocket.accept());
+                socket = new KSocket(serverSocket.accept());
 
-                fes.getForkJoinPool().execute(new RouterFiber(socket,routes, files, proxies));
+                if (useFibers) {
+                    fes.getForkJoinPool().execute(new RouterFiber(socket,routes, files, proxies));
+                } else {
+                    forkJoinPool.execute(new RouterFiber(socket, routes, files, proxies));
+                }
+
 
             } catch (IOException e) {
                 e.printStackTrace();

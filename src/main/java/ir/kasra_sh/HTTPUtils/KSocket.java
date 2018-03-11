@@ -5,7 +5,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
-public class SocketIO {
+public class KSocket {
     private java.net.Socket socket = null;
     private DataInputStream dis;
     private DataOutputStream dos;
@@ -16,12 +16,12 @@ public class SocketIO {
     private char lastChar;
     private int lineBufferSize = 2048;
 
-    public SocketIO(java.net.Socket socket) throws IOException {
+    public KSocket(java.net.Socket socket) throws IOException {
         this.socket = socket;
         init();
     }
 
-    public SocketIO(java.net.Socket socket, int lineBufferSize) throws IOException {
+    public KSocket(java.net.Socket socket, int lineBufferSize) throws IOException {
         this.socket = socket;
         this.lineBufferSize = lineBufferSize;
         init();

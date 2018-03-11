@@ -1,19 +1,17 @@
 package ir.kasra_sh.HTTPUtils;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.zip.Deflater;
-import java.util.zip.GZIPOutputStream;
 
 public class ResponseWriter {
     private ResponseHeader header = new ResponseHeader();
     private String h;
     boolean rh=false;
-    private SocketIO socketIO;
+    private KSocket KSocket;
 
-    public ResponseWriter(SocketIO socketIO) {
-        this.socketIO = socketIO;
+    public ResponseWriter(KSocket KSocket) {
+        this.KSocket = KSocket;
     }
 
     public void setLength(int len){
@@ -23,11 +21,11 @@ public class ResponseWriter {
     public void writeHeader(){
         if (!rh) {
             try {
-                socketIO.writeString(header.getFullHeader());
+                KSocket.writeString(header.getFullHeader());
             } catch (IOException e) {
                 //e.printStackTrace();
             }
-            socketIO.flush();
+            KSocket.flush();
             rh = true;
         }
     }
@@ -38,44 +36,44 @@ public class ResponseWriter {
 
     public void append(String s) throws IOException {
         writeHeader();
-        socketIO.writeString(s);
-        socketIO.flush();
+        KSocket.writeString(s);
+        KSocket.flush();
     }
 
     public void append(byte[] b, int i, int len) throws IOException {
         writeHeader();
-        socketIO.writeBytes(b,i,len);
-        socketIO.flush();
+        KSocket.writeBytes(b,i,len);
+        KSocket.flush();
     }
 
     public void appendLine(String s){
         writeHeader();
         try {
-            socketIO.writeString(s);
-            socketIO.writeString("\n");
+            KSocket.writeString(s);
+            KSocket.writeString("\n");
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        socketIO.flush();
+        KSocket.flush();
     }
 
     public void finish(){
-        socketIO.flush();
-        socketIO.close();
+        KSocket.flush();
+        KSocket.close();
     }
 
     public void write(String s){
         writeHeader();
         try {
-            socketIO.writeString(s);
-            socketIO.flush();
+            KSocket.writeString(s);
+            KSocket.flush();
         } catch (IOException e) {}
     }
 
     public void write(byte[] b,int i1, int i2) throws IOException {
-        socketIO.writeBytes(b,i1,i2);
-        socketIO.flush();
+        KSocket.writeBytes(b,i1,i2);
+        KSocket.flush();
     }
 
     public void writeAll(String s){
@@ -84,10 +82,10 @@ public class ResponseWriter {
             writeHeader();
         }
         try {
-            socketIO.writeString(s);
+            KSocket.writeString(s);
         } catch (IOException e) {}
-        socketIO.flush();
-        socketIO.close();
+        KSocket.flush();
+        KSocket.close();
     }
 
     public void writeResponse(int responseCode, String s) throws IOException {
@@ -101,9 +99,9 @@ public class ResponseWriter {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        socketIO.writeString(s);
-        socketIO.flush();
-        socketIO.close();
+        KSocket.writeString(s);
+        KSocket.flush();
+        KSocket.close();
     }
 
     public void writeResponseCompressed(int responseCode, String s){
@@ -117,9 +115,9 @@ public class ResponseWriter {
                 writeHeader();
             }
             try {
-                socketIO.writeBytes(comp);
-                socketIO.flush();
-                socketIO.close();
+                KSocket.writeBytes(comp);
+                KSocket.flush();
+                KSocket.close();
             } catch (Exception e) {
                 //e.printStackTrace();
             }
@@ -140,9 +138,9 @@ public class ResponseWriter {
             writeHeader();
         }
         try {
-            socketIO.writeBytes(b,i,len);
-            socketIO.flush();
-            socketIO.close();
+            KSocket.writeBytes(b,i,len);
+            KSocket.flush();
+            KSocket.close();
         } catch (IOException e) { }
     }
 
@@ -153,9 +151,9 @@ public class ResponseWriter {
             writeHeader();
         }
         try {
-            socketIO.writeBytes(b,i,len);
-            socketIO.flush();
-            socketIO.close();
+            KSocket.writeBytes(b,i,len);
+            KSocket.flush();
+            KSocket.close();
         } catch (IOException e) { }
     }
 

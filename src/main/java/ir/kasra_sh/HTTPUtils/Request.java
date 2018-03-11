@@ -16,7 +16,11 @@ public class Request {
         return conn.getRoute();
     }
 
-    public byte[] getBody() {
+    public byte[] getBodyBytes() {
+        return conn.getBodyBytes();
+    }
+
+    public String getBody() {
         return conn.getBody();
     }
 

@@ -4,7 +4,7 @@ import co.paralleluniverse.fibers.SuspendExecution;
 import ir.kasra_sh.Examples.*;
 import ir.kasra_sh.HTTPUtils.HTTPConnection;
 import ir.kasra_sh.HTTPUtils.ResponseCode;
-import ir.kasra_sh.MikroWebServer.IO.LightWebServer;
+import ir.kasra_sh.MikroWebServer.IO.MikroServer;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -13,7 +13,6 @@ import java.util.Scanner;
 public class Main {
 
     private static boolean started = false;
-    private static LightWebServer lws;
 
     public static void main(String[] args) throws IOException {
         Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
@@ -63,28 +62,34 @@ public class Main {
 
     private static void start(int port, String root){
         if (started) return;
-        lws = new LightWebServer();
-        //LightWebServer keyserver = new LightWebServer();
-        //LightWebServer errServer = new LightWebServer();
-        LightWebServer lx = new LightWebServer();
-        LightWebServer TLSProxy = new LightWebServer();
-        //LightWebServer proxyServer = new LightWebServer();
+        lws = new MikroServer();
+        //MikroServer keyserver = new MikroServer();
+        MikroServer errServer = new MikroServer();
+        MikroServer lx = new MikroServer();
+
+        MikroServer TLSProxy = new MikroServer();
+
+        //MikroServer proxyServer = new MikroServer();
+
         TLSProxy.useTLS("/home/blkr/www/keystore.jks");
         try {
             //proxyServer.addProxyPath("/resources*",new InetSocketAddress("localhost",8080));
+            lx.addContextHandler("/404", new ErrorHandler());
             lx.addFileHandler("/files*",root, new FileServerHandler());
+            errServer.addFileHandler("/files*",root, new FileServerHandler());
             RandomKeyHandler.root = root+"/";
             lx.addContextHandler("/genkey*",new RandomKeyHandler());
             //lx.addProxyPath("/404*", new InetSocketAddress("localhost",8000));
             lx.addContextHandler("/api/user", new GsonTestHandler());
-            lx.addContextHandler("/404", new ErrorHandler());
+            errServer.addContextHandler("/404", new ErrorHandler());
             TLSProxy.addProxyPath("/*", new InetSocketAddress("localhost", 8001));
 
-            lx.start(8001, 100);
+
+            lx.start(8001, 10, true);
             Thread.sleep(300);
-            TLSProxy.start(8080, 100);
+            TLSProxy.start(8080, 100, false);
             Thread.sleep(200);
-            //errServer.start(8000,10);
+            errServer.start(8000,5, false);
             //proxyServer.startDynamic(8000,40);
             started = true;
         } catch (IOException e) {

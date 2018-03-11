@@ -15,7 +15,7 @@ import java.util.HashSet;
 public class UploadHandler extends Handler {
 
     private static HashSet<String> mimes = new HashSet<>();
-    private static String root = "/home/blkr/www/uploader/userfiles/";
+    public static String root = null;
 
     static {
         mimes.add(MimeTypes.Image.PNG);
@@ -29,7 +29,7 @@ public class UploadHandler extends Handler {
     @Suspendable
     @Override
     public int handle() {
-        String key = conn.getOption("key");
+        String key = req.getArg("key");
         if (key == null) {
             key="";
         }
@@ -38,7 +38,7 @@ public class UploadHandler extends Handler {
             if (fsize > 0) {
                 String ct = conn.getHeader("Content-Type");
                 if (mimes.contains(ct)) {
-                    conn.getBody();
+                    //conn.getBodyBytes();
                     String username = conn.getHeader("x-username");
                     String ext = "";
                     if (ct.equals(MimeTypes.Text.TXT)) ext = "txt";
@@ -46,9 +46,8 @@ public class UploadHandler extends Handler {
                     else ext = ct.split("/")[1];
 
                     String fileaddr = root+username+System.nanoTime() + "." +ext;
-
                     try {
-                        Files.write(Paths.get(fileaddr), conn.body);
+                        Files.write(Paths.get(fileaddr), conn.getBodyBytes());
                         System.out.println("Uploaded "+fileaddr);
                     } catch (IOException e) { e.printStackTrace();}
                     conn.writer.getHeader().setStatus(ResponseCode.OK);

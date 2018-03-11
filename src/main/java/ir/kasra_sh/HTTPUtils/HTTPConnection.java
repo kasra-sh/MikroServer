@@ -11,23 +11,24 @@ public class HTTPConnection {
     private Properties o = new Properties();
     private HTTPMethod method;
     private String route;
-    private SocketIO socket;
+    private KSocket socket;
     private StringBuilder rawHeader = new StringBuilder(2048);
     public ResponseWriter writer;
     private int headerSize = 0;
     private int bodySize = 0;
-    public byte[] body = null;
+    protected byte[] body = null;
+    private String bodyString = null;
     private RequestParser requestParser;
     private String filePath = null;
     private String context;
     public Request req = new Request(this);
 
 
-    public void setSocket(SocketIO socket){
+    public void setSocket(KSocket socket){
         this.socket = socket;
     }
 
-    public SocketIO socketIO(){
+    public KSocket socketIO(){
         return socket;
     }
 
@@ -103,12 +104,25 @@ public class HTTPConnection {
         this.bodySize = bodySize;
     }
 
-    public byte[] getBody() {
+    public byte[] getBodyBytes() {
         try {
             if (this.body == null) {
                 requestParser.getBody();
             }
             return this.body;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String getBody() {
+        try {
+            if (this.bodyString == null) {
+                requestParser.getBody();
+                this.bodyString = new String(this.body);
+            }
+            return this.bodyString;
         } catch (IOException e) {
             e.printStackTrace();
         }

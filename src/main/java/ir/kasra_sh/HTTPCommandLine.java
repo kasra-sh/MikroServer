@@ -1,9 +1,9 @@
 package ir.kasra_sh;
 
 import ir.kasra_sh.HTTPUtils.HTTPConnection;
+import ir.kasra_sh.HTTPUtils.KSocket;
 import ir.kasra_sh.HTTPUtils.RequestParser;
 import ir.kasra_sh.HTTPUtils.ResponseWriter;
-import ir.kasra_sh.HTTPUtils.SocketIO;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -11,7 +11,7 @@ import java.net.ServerSocket;
 
 public class HTTPCommandLine {
     private ServerSocket s;
-    private SocketIO socket;
+    private KSocket socket;
     private RequestParser rp;
 
 
@@ -25,7 +25,7 @@ public class HTTPCommandLine {
             socket.close();
         } catch (Exception e){ }
 
-        socket = new SocketIO(s.accept());
+        socket = new KSocket(s.accept());
         rp = new RequestParser(socket);
         rp.parseHeader();
         if (rp.getErrCode() == 0) {

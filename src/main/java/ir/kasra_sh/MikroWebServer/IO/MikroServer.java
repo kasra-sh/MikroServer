@@ -7,14 +7,14 @@ import java.net.InetSocketAddress;
 import java.util.AbstractMap;
 import java.util.Hashtable;
 
-public class LightWebServer {
+public class MikroServer {
     private SocketListener sl;
     private Hashtable<String,Handler> routes = new Hashtable<>();
     private Hashtable<String,AbstractMap.SimpleEntry<Handler,String>> filePaths = new Hashtable<>();
     private Hashtable<String,InetSocketAddress> proxies = new Hashtable<>();
     private String ks = null;
 
-    public LightWebServer() {
+    public MikroServer() {
     }
 
     public void addContextHandler(String context, Handler h) throws Exception {
@@ -37,7 +37,7 @@ public class LightWebServer {
         ks = keystore;
     }
 
-    public void start(int port, int parallelism) throws IOException, SuspendExecution {
+    public void start(int port, int parallelism, boolean useFibers) throws IOException, SuspendExecution {
         if (ks == null) {
             sl = new SocketListener(port, routes, filePaths, proxies);
             sl.setWorkers(parallelism);
@@ -46,6 +46,7 @@ public class LightWebServer {
             sl = new SocketListener(port, routes, filePaths, proxies, ks);
             sl.setWorkers(parallelism);
         }
+        sl.setUseFibers(useFibers);
         sl.start();
     }
 

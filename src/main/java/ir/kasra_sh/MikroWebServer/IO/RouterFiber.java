@@ -14,7 +14,7 @@ import java.util.Set;
 
 public class RouterFiber implements Runnable {
 
-    private SocketIO socket;
+    private KSocket socket;
     private RequestParser requestParser;
     private Handler handler;
     private Set<Entry<String,Handler>> routes;
@@ -23,7 +23,7 @@ public class RouterFiber implements Runnable {
     private HTTPConnection connection;
 
 
-    public RouterFiber(SocketIO s,
+    public RouterFiber(KSocket s,
                        Set<Entry<String,Handler>> routes,
                        Set<Entry<String,AbstractMap.SimpleEntry<Handler,String>>> files,
                        Set<Entry<String, InetSocketAddress>> proxies) throws IOException {
