@@ -111,10 +111,6 @@ public class RouterFiber implements Runnable {
                             //System.out.println(pt);
                         }
                         if (route.matches(pt)) {
-                            //System.out.println("route = "+route);
-                            //System.out.println("pt    = "+pt);
-                            //handler = e.getValue().getKey().getClass().newInstance();
-                            //reverseProxy.setContext(e.getKey().replace("*", ""));
                             requestParser.parseHeader();
                             connection = requestParser.getHTTPConnection();
                             connection.setContext(e.getKey().replace("*",""));

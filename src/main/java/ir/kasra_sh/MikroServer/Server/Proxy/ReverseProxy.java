@@ -7,6 +7,8 @@ import ir.kasra_sh.MikroServer.HTTPUtils.KSocket;
 import java.net.*;
 import java.time.Instant;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @Suspendable
 public class ReverseProxy implements Runnable {
@@ -15,12 +17,16 @@ public class ReverseProxy implements Runnable {
     private byte[] buff = new byte[4096];
     private InetSocketAddress des;
     private int len;
+    private HashMap<String,String> overrides = new HashMap<>();
 
     public ReverseProxy(InetSocketAddress dest, HTTPConnection conn){
         con = conn;
         des = dest;
     }
 
+    public void addOverride(String k, String v) {
+        overrides.putIfAbsent(k, v);
+    }
     @Suspendable
     @Override
     public void run() {
@@ -41,7 +47,28 @@ public class ReverseProxy implements Runnable {
                 len = Integer.valueOf(con.getHeader("Content-Length"));
             }catch (Exception e) {
             }
-            d.writeString(con.getRawHeader().toString());
+            if (overrides.isEmpty())
+                d.writeString(con.getRawHeader().toString());
+            else {
+                boolean found;
+                for (Map.Entry<Object, Object> h:
+                        con.getHeaders().entrySet()){
+                    found = false;
+                    for (Map.Entry<String, String> m:
+                            overrides.entrySet()) {
+                        if (((String)h.getKey()).equalsIgnoreCase(m.getKey())) {
+                            d.writeString(m.getKey()+": "+m.getValue()+"\r\n");
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (found) {
+                        continue;
+                    }
+                    d.writeString((String)h.getKey() + ": "+(String)h.getValue()+"\r\n");
+                }
+                d.writeString("\r\n");
+            }
             d.flush();
             int read=0;
             while (read<len) {
