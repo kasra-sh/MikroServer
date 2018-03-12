@@ -133,7 +133,7 @@ public class RouterFiber implements Runnable {
                 }
 
                 if (!found) {
-                    System.out.println("Not Found");
+                    System.out.println("Not Found - "+route);
                     //handler = routes.get("/404");
                     requestParser.parseHeader();
                     connection = requestParser.getHTTPConnection();
