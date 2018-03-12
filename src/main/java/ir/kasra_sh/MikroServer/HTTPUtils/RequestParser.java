@@ -16,6 +16,7 @@ public class RequestParser {
     private StringBuilder v = new StringBuilder(1024);
     private StringBuilder ver = new StringBuilder(10);
     private String[] spl;
+    private String respStatus;
     private static final byte[] endLine = new byte[]{'\r','\n'};
     private int errCode=0;
     private boolean rh = false;
@@ -79,6 +80,46 @@ public class RequestParser {
             e.printStackTrace();
             errCode = ResponseCode.BAD_REQUEST;
             return;
+        }
+
+    }
+
+    public String getStatus() throws IOException {
+        if (!rh) {
+            //route = is.readLineBytes();
+            connection = new HTTPConnection();
+            connection.setRequestParser(this);
+            connection.setSocket(is);
+            readLine();
+            respStatus = new String(h,0,hl);
+            //parseHead();
+            //setMethod();
+            //spl = route.toString().split("\\?");
+            //connection.setRoute(URLDecoder.decode(spl[0], "UTF-8"));
+            rh = true;
+        }
+        //System.out.println(respStatus);
+        return respStatus;
+    }
+
+    public void parseResponseHeader() throws IOException {
+        getStatus();
+        while (true) {
+            readLine();
+            //System.out.println(new String(h,0,hl));
+            if (hl == 2) {
+                if (h[0] == '\r' && h[1] == '\n') {
+                    //System.out.println("found header end");
+                    break;
+                }
+            }
+            else if (hl>2) {
+                parseKV();
+            } else {
+                //System.out.println("! hl>2");
+                errCode = ResponseCode.BAD_REQUEST;
+                return;
+            }
         }
 
     }

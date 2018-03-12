@@ -5,6 +5,7 @@ import co.paralleluniverse.fibers.SuspendExecution;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.util.AbstractMap;
+import java.util.HashMap;
 import java.util.Hashtable;
 
 public class Mikro {
@@ -12,6 +13,7 @@ public class Mikro {
     private Hashtable<String,Handler> routes = new Hashtable<>();
     private Hashtable<String,AbstractMap.SimpleEntry<Handler,String>> filePaths = new Hashtable<>();
     private Hashtable<String,InetSocketAddress> proxies = new Hashtable<>();
+    private HashMap<String, HashMap<String, String>> overrides = new HashMap<>();
     private String ks = null;
 
     public Mikro() {
@@ -29,8 +31,9 @@ public class Mikro {
         filePaths.putIfAbsent(context.toLowerCase(), new AbstractMap.SimpleEntry(handler,dir));
     }
 
-    public void addProxyPath(String context,InetSocketAddress destination){
+    public void addProxyPath(String context, InetSocketAddress destination, HashMap<String, String> ovr){
         proxies.putIfAbsent(context,destination);
+        overrides.putIfAbsent(context,ovr);
     }
 
     public void useTLS(String keystore){
@@ -39,11 +42,11 @@ public class Mikro {
 
     public void start(int port, int parallelism, boolean useFibers) throws IOException, SuspendExecution {
         if (ks == null) {
-            sl = new SocketListener(port, routes, filePaths, proxies);
+            sl = new SocketListener(port, routes, filePaths, proxies, overrides);
             sl.setWorkers(parallelism);
         }
         else {
-            sl = new SocketListener(port, routes, filePaths, proxies, ks);
+            sl = new SocketListener(port, routes, filePaths, proxies, overrides, ks);
             sl.setWorkers(parallelism);
         }
         sl.setUseFibers(useFibers);

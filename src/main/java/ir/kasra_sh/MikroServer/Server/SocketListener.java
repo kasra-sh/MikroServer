@@ -29,17 +29,20 @@ public class SocketListener extends Thread{
     private Set<Map.Entry<String,Handler>> routes;
     private Set<Map.Entry<String,AbstractMap.SimpleEntry<Handler,String>>> files;
     private Set<Map.Entry<String, InetSocketAddress>> proxies;
+    private HashMap<String, HashMap<String, String>> overrides;
 
     private boolean stop = false;
 
     protected SocketListener(int port,
                              Hashtable<String,Handler> routes,
                              Hashtable<String,AbstractMap.SimpleEntry<Handler,String>> files,
-                             Hashtable<String, InetSocketAddress> proxies) {
+                             Hashtable<String, InetSocketAddress> proxies,
+                             HashMap<String, HashMap<String, String>> overrides) {
         stop = false;
         this.routes = routes.entrySet();
         this.files = files.entrySet();
         this.proxies = proxies.entrySet();
+        this.overrides = overrides;
         try {
             serverSocket = new ServerSocket();
             serverSocket.bind(new InetSocketAddress(port));
@@ -48,15 +51,16 @@ public class SocketListener extends Thread{
         }
     }
 
-    protected SocketListener(int port, Hashtable<String,
-            Handler> routes, Hashtable<String,
-            AbstractMap.SimpleEntry<Handler, String>> files,
+    protected SocketListener(int port, Hashtable<String, Handler> routes,
+                             Hashtable<String, AbstractMap.SimpleEntry<Handler, String>> files,
                              Hashtable<String, InetSocketAddress> proxies,
+                             HashMap<String, HashMap<String, String>> overrides,
                              String jkeystore) throws IOException {
         stop = false;
         this.routes = routes.entrySet();
         this.files = files.entrySet();
         this.proxies = proxies.entrySet();
+        this.overrides = overrides;
         serverSocket = makeSSLServerSocket(port,jkeystore,"1kaskaskas");
         if (serverSocket == null){
             serverSocket = new ServerSocket();
@@ -173,9 +177,9 @@ public class SocketListener extends Thread{
                 socket = new KSocket(serverSocket.accept());
 
                 if (useFibers) {
-                    fes.getForkJoinPool().execute(new RouterFiber(socket,routes, files, proxies));
+                    fes.getForkJoinPool().execute(new RouterFiber(socket,routes, files, proxies, overrides));
                 } else {
-                    forkJoinPool.execute(new RouterFiber(socket, routes, files, proxies));
+                    forkJoinPool.execute(new RouterFiber(socket, routes, files, proxies, overrides));
                 }
 
 

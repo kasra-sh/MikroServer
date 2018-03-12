@@ -9,6 +9,7 @@ import ir.kasra_sh.MikroServer.Utils.MimeTypes;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.util.AbstractMap;
+import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.Set;
 
@@ -21,14 +22,17 @@ public class RouterFiber implements Runnable {
     private Set<Entry<String,Handler>> routes;
     private Set<Entry<String,AbstractMap.SimpleEntry<Handler,String>>> files;
     private Set<Entry<String, InetSocketAddress>> proxies;
+    private HashMap<String,HashMap<String, String>> overrides;
     private HTTPConnection connection;
 
 
     public RouterFiber(KSocket s,
                        Set<Entry<String,Handler>> routes,
                        Set<Entry<String,AbstractMap.SimpleEntry<Handler,String>>> files,
-                       Set<Entry<String, InetSocketAddress>> proxies) throws IOException {
+                       Set<Entry<String, InetSocketAddress>> proxies,
+                       HashMap<String, HashMap<String, String>> overrides) throws IOException {
         this.proxies = proxies;
+        this.overrides = overrides;
         this.routes = routes;
         this.files = files;
         socket = s;
@@ -121,7 +125,9 @@ public class RouterFiber implements Runnable {
                                 sendErrorCode(requestParser.getErrCode(),connection);
                                 break;
                             }
-                            new ReverseProxy(e.getValue(),connection).run();
+                            ReverseProxy rp = new ReverseProxy(e.getValue(),connection);
+                            rp.setOverrides(overrides.get(pt));
+                            rp.run();
                             found = true;
                             break;
                         }

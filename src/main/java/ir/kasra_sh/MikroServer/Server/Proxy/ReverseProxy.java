@@ -3,6 +3,7 @@ package ir.kasra_sh.MikroServer.Server.Proxy;
 import co.paralleluniverse.fibers.Suspendable;
 import ir.kasra_sh.MikroServer.HTTPUtils.HTTPConnection;
 import ir.kasra_sh.MikroServer.HTTPUtils.KSocket;
+import ir.kasra_sh.MikroServer.HTTPUtils.RequestParser;
 
 import java.net.*;
 import java.time.Instant;
@@ -13,79 +14,77 @@ import java.util.Map;
 @Suspendable
 public class ReverseProxy implements Runnable {
 
-    private HTTPConnection con;
+    private HTTPConnection user;
     private byte[] buff = new byte[4096];
     private InetSocketAddress des;
     private int len;
     private HashMap<String,String> overrides = new HashMap<>();
 
     public ReverseProxy(InetSocketAddress dest, HTTPConnection conn){
-        con = conn;
+        user = conn;
         des = dest;
     }
 
-    public void addOverride(String k, String v) {
-        overrides.putIfAbsent(k, v);
+    public void setOverrides(HashMap<String, String> o) {
+        overrides = o;
     }
     @Suspendable
     @Override
     public void run() {
         try {
             StringBuilder p = new StringBuilder();
-            p.append(con.socketIO().getSocket().getInetAddress()).append(" - ");
+            p.append(user.socketIO().getSocket().getInetAddress()).append(" - ");
             p.append(Date.from(Instant.now()));
             p.append(" - Routed to ").append(des.getAddress().getHostAddress()).append(":").append(des.getPort());
             long st = System.currentTimeMillis();
             //System.out.println("Routing "+sock.getLocalAddress()+" to "+des.getHostName()+":"+des.getPort());
             //System.out.println(new String(dt,0,len));
             //System.out.println("to "+ des.getAddress().getHostAddress() + ":" + des.getPort());
-            KSocket d = new KSocket(new Socket(des.getAddress().getHostAddress(),des.getPort()));
+            KSocket svr = new KSocket(new Socket(des.getAddress().getHostAddress(),des.getPort()));
             //System.out.println("KSocket Opened !");
             ////////////////////////
             int len = 0;
             try {
-                len = Integer.valueOf(con.getHeader("Content-Length"));
+                len = Integer.valueOf(user.getHeader("Content-Length"));
             }catch (Exception e) {
             }
-            if (overrides.isEmpty())
-                d.writeString(con.getRawHeader().toString());
-            else {
-                boolean found;
-                for (Map.Entry<Object, Object> h:
-                        con.getHeaders().entrySet()){
-                    found = false;
-                    for (Map.Entry<String, String> m:
-                            overrides.entrySet()) {
-                        if (((String)h.getKey()).equalsIgnoreCase(m.getKey())) {
-                            d.writeString(m.getKey()+": "+m.getValue()+"\r\n");
-                            found = true;
-                            break;
-                        }
-                    }
-                    if (found) {
-                        continue;
-                    }
-                    d.writeString((String)h.getKey() + ": "+(String)h.getValue()+"\r\n");
-                }
-                d.writeString("\r\n");
-            }
-            d.flush();
+            svr.writeString(user.getRawHeader().toString());
+            svr.flush();
             int read=0;
             while (read<len) {
-                int l = con.socketIO().readBytes(buff);
-                d.writeBytes(buff,0,l);
+                int l = user.socketIO().readBytes(buff);
+                svr.writeBytes(buff,0,l);
                 read += l;
-                d.flush();
+                svr.flush();
             }
-
+            RequestParser rp = new RequestParser(svr);
+            rp.parseResponseHeader();
+            HTTPConnection svrConn = rp.getHTTPConnection();
+            if (overrides.isEmpty()) {
+                user.socketIO().writeString(svrConn.getRawHeader().toString());
+            }
+            else {
+                String resp_status = rp.getStatus();
+                //System.out.println("Status : "+resp_status);
+                user.socketIO().writeString(resp_status);
+                for (Map.Entry<String, String> m:
+                     overrides.entrySet()) {
+                    svrConn.getHeaders().replace(m.getKey(), m.getValue());
+                }
+                for (Map.Entry<Object, Object> x :
+                        svrConn.getHeaders().entrySet()) {
+                    user.socketIO().writeString(x.getKey() + ": "+x.getValue()+"\r\n");
+                }
+                user.socketIO().writeString("\r\n");
+            }
             while (true) {
-                int l = d.readBytes(buff);
+                int l = svr.readBytes(buff);
                 if (l<0) break;
-                con.socketIO().writeBytes(buff,0,l);
-                con.socketIO().flush();
+                user.socketIO().writeBytes(buff,0,l);
+                user.socketIO().flush();
             }
-            con.socketIO().close();
-            d.close();
+            user.socketIO().close();
+            svr.close();
             ////////////////////////
             p.append(" - ").append(System.currentTimeMillis()-st).append("ms");
             System.out.println(p);
@@ -93,10 +92,10 @@ public class ReverseProxy implements Runnable {
 
 
         } catch (Exception e){
-            e.printStackTrace();
-            con.writer.finish();
+            //e.printStackTrace();
+            user.writer.finish();
         } finally {
-            con.writer.finish();
+            user.writer.finish();
         }
 
     }
