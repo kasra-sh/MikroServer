@@ -1,5 +1,5 @@
 group 'ir.kasra-sh'
-version '0.1a'
+version '2.0b'
 apply plugin: 'idea'
 apply plugin: 'java'
 
@@ -10,35 +10,41 @@ repositories {
     mavenCentral()
     maven { url "https://jitpack.io" }
 }
+
 configurations {
     quasar
 }
-dependencies {
 
+dependencies {
     compile group: 'redis.clients', name: 'jedis', version: '2.8.0'
     compile group: 'com.google.code.gson', name: 'gson', version: '2.8.2'
     testCompile group: 'junit', name: 'junit', version: '4.12'
     compile 'co.paralleluniverse:quasar-core:0.7.9:jdk8'
     quasar 'co.paralleluniverse:quasar-core:0.7.9:jdk8'
-
 }
 
+// makes fat jar with all dependencies
 task fatJar(type: Jar) {
     manifest {
         attributes 'Implementation-Title': 'Gradle Jar File Example',
-                'Implementation-Version': version,
+                'Implementation-Version': version
+                /*
                 'Main-Class': 'ir.kasra_sh.Main'
+                */
     }
-    baseName = project.name + '-all'
+    baseName = project.name + '-core'
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
     with jar
 }
+
+// sets quasar as javaagent
 tasks.withType(JavaExec)
         {
             jvmArgs "-javaagent:${(++configurations.quasar.iterator())}"
         }
 
+// replace main with your main class
 task run(type: JavaExec) {
-    main = 'ir.kasra_sh.Main'
+    /*main = 'ir.kasra_sh.Main'*/
     classpath = sourceSets.main.runtimeClasspath
 }
