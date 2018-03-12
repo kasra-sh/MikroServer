@@ -1,7 +1,8 @@
-group 'ir.kasra-sh'
+group 'com.github.kasra-sh'
 version '2.0b'
 apply plugin: 'idea'
 apply plugin: 'java'
+apply plugin: 'maven'
 
 
 sourceCompatibility = 1.8
@@ -32,7 +33,7 @@ task fatJar(type: Jar) {
                 'Main-Class': 'ir.kasra_sh.Main'
                 */
     }
-    baseName = project.name + '-core'
+    baseName = project.name + '-all'
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
     with jar
 }
@@ -47,4 +48,13 @@ tasks.withType(JavaExec)
 task run(type: JavaExec) {
     /*main = 'ir.kasra_sh.Main'*/
     classpath = sourceSets.main.runtimeClasspath
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives sourcesJar
 }
