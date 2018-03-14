@@ -33,7 +33,7 @@ public class ReverseProxy implements Runnable {
     public void run() {
         try {
             StringBuilder p = new StringBuilder();
-            p.append(user.socketIO().getSocket().getInetAddress()).append(" - ");
+            p.append(user.kSocket().getSocket().getInetAddress()).append(" - ");
             p.append(Date.from(Instant.now()));
             p.append(" - Routed to ").append(des.getAddress().getHostAddress()).append(":").append(des.getPort());
             long st = System.currentTimeMillis();
@@ -52,7 +52,7 @@ public class ReverseProxy implements Runnable {
             svr.flush();
             int read=0;
             while (read<len) {
-                int l = user.socketIO().readBytes(buff);
+                int l = user.kSocket().readBytes(buff);
                 svr.writeBytes(buff,0,l);
                 read += l;
                 svr.flush();
@@ -61,29 +61,29 @@ public class ReverseProxy implements Runnable {
             rp.parseResponseHeader();
             HTTPConnection svrConn = rp.getHTTPConnection();
             if (overrides.isEmpty()) {
-                user.socketIO().writeString(svrConn.getRawHeader().toString());
+                user.kSocket().writeString(svrConn.getRawHeader().toString());
             }
             else {
                 String resp_status = rp.getStatus();
                 //System.out.println("Status : "+resp_status);
-                user.socketIO().writeString(resp_status);
+                user.kSocket().writeString(resp_status);
                 for (Map.Entry<String, String> m:
                      overrides.entrySet()) {
                     svrConn.getHeaders().replace(m.getKey(), m.getValue());
                 }
                 for (Map.Entry<Object, Object> x :
                         svrConn.getHeaders().entrySet()) {
-                    user.socketIO().writeString(x.getKey() + ": "+x.getValue()+"\r\n");
+                    user.kSocket().writeString(x.getKey() + ": "+x.getValue()+"\r\n");
                 }
-                user.socketIO().writeString("\r\n");
+                user.kSocket().writeString("\r\n");
             }
             while (true) {
                 int l = svr.readBytes(buff);
                 if (l<0) break;
-                user.socketIO().writeBytes(buff,0,l);
-                user.socketIO().flush();
+                user.kSocket().writeBytes(buff,0,l);
+                user.kSocket().flush();
             }
-            user.socketIO().close();
+            user.kSocket().close();
             svr.close();
             ////////////////////////
             p.append(" - ").append(System.currentTimeMillis()-st).append("ms");

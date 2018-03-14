@@ -13,16 +13,16 @@ public class Test {
     }
 
     public Test(String ... args) {
-        Mikro mikro = new Mikro();
+        /*Mikro mikro = new Mikro();
         HashMap<String, String> ovr = new HashMap<>();
         ovr.putIfAbsent("Server", "MikroServer");
         mikro.addProxyPath("/api/self_update", new InetSocketAddress("localhost", 8001), ovr);
+
         try {
+            mikro.addContextHandler("/test",new MultiHandler());
             mikro.start(8080, 5, false);
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-        } catch (SuspendExecution suspendExecution) {
-            suspendExecution.printStackTrace();
-        }
+        }*/
     }
 }

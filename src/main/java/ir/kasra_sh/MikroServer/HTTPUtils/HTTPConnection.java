@@ -2,7 +2,10 @@ package ir.kasra_sh.MikroServer.HTTPUtils;
 
 import co.paralleluniverse.fibers.Suspendable;
 
+import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Properties;
 
 @Suspendable
@@ -22,13 +25,14 @@ public class HTTPConnection {
     private String filePath = null;
     private String context;
     public Request req = new Request(this);
+    protected HashMap<String, byte[]> multipart;
 
 
     protected void setSocket(KSocket socket){
         this.socket = socket;
     }
 
-    public KSocket socketIO(){
+    public KSocket kSocket(){
         return socket;
     }
 
@@ -39,7 +43,11 @@ public class HTTPConnection {
 
     @Suspendable
     public String getHeader(String name){
-        return p.getProperty(name);
+        String v = p.getProperty(name);
+        if (v == null) {
+            v = p.getProperty(name.toLowerCase());
+        }
+        return v;
     }
 
     @Suspendable
@@ -127,6 +135,22 @@ public class HTTPConnection {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public HashMap<String, byte[]> getMultiPart(){
+        requestParser.getMultiPartBody();
+        return multipart;
+        //return null;
+    }
+
+    public byte[] getFormData(String name) {
+        requestParser.getMultiPartBody();
+        return multipart.get(name);
+    }
+
+    public String getFormDataString(String name) {
+        requestParser.getMultiPartBody();
+        return new String(multipart.get(name));
     }
 
     public void setRequestParser(RequestParser requestParser) {

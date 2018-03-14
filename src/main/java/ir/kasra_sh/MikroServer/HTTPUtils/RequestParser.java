@@ -2,8 +2,12 @@ package ir.kasra_sh.MikroServer.HTTPUtils;
 
 
 import java.io.IOException;
+import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.HashMap;
 
 public class RequestParser {
     private HTTPConnection connection = null;// = new HTTPConnection();
@@ -20,6 +24,7 @@ public class RequestParser {
     private static final byte[] endLine = new byte[]{'\r','\n'};
     private int errCode=0;
     private boolean rh = false;
+    private String lastLine;
 
     public RequestParser(KSocket KSocket){
         this.is = KSocket;
@@ -256,6 +261,8 @@ public class RequestParser {
         if (connection.getMethod() != HTTPMethod.POST || ln<=0) {
             return;
         }
+
+        if (connection.body!=null) return;
         connection.setBodySize(ln);
         connection.body = new byte[ln];
 
@@ -270,6 +277,89 @@ public class RequestParser {
                 e.printStackTrace();
             }
             start+=l;
+        }
+    }
+
+    public void getMultiPartBody(){
+        if (connection.getMethod()!= HTTPMethod.POST) {
+            //System.out.println("not post");
+            return;
+        }
+        //System.out.println(connection.getHeaders().stringPropertyNames());
+        String ct = connection.getHeader("Content-Type");
+        if (!ct.startsWith("multipart")) {
+            return;
+        }
+        byte[] stream = connection.getBodyBytes();
+        //System.out.println(connection.getBody());
+        try {
+            String bound = "--"+ct.substring(ct.indexOf("=")+1);
+            int prev=0;
+            int next=0;
+            connection.multipart = new HashMap<>();
+            while (stream.length-(prev = seekNext(stream,prev,bound.getBytes()))>4) {
+                //System.out.println("PREV = "+prev);
+                prev = seekNext(stream, prev+2, "nt-Dispo".getBytes());
+                prev = seekNext(stream, prev, "name=\"".getBytes());
+                next = seekNext(stream, prev, "\"".getBytes());
+                String key = new String(stream, prev, next - prev - 1);
+                prev = next;
+                prev = seekNext(stream, prev, "\r\n\r\n".getBytes());
+                next = seekNext(stream, prev, bound.getBytes());
+                byte[] b = new byte[next - prev - bound.length()-2];
+                System.arraycopy(stream,prev,b,0,b.length);
+                //System.out.println(new String(b).replace("\r\n","RN"));
+                connection.multipart.putIfAbsent(key,b);
+            }
+            //System.out.println(next);
+            //System.out.println(seekNext(stream,next+1,bound.getBytes()));
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+
+    private int seekNext(byte[] stream, int init, byte[] ... endSeq) throws IOException, IndexOutOfBoundsException {
+        //setLineBufferSize(limit);
+        int index=init;
+        boolean match = false;
+        while (true) {
+
+            for (int j = 0; j < endSeq.length; j++) {
+                //System.out.println();
+                if (index+endSeq.length>=stream.length) {
+                    return -1;
+                }
+                if (index>=endSeq[j].length-1) {
+                    match = true;
+                    for (int i = 0; i < endSeq[j].length; i++) {
+                        //System.out.println("Seq"+j+" checking "+i+" : "+(char)lineBuffer[(index - endSeq[j].length)+i+1]);
+                        if (stream[(index - endSeq[j].length)+i+1] == endSeq[j][i]) {
+                            continue;
+                        } else {
+                            match = false;
+                            break;
+                        }
+                    }
+                } else match = false;
+
+                if (match) {
+                    break;
+                }
+            }
+
+            if (match) {
+                //lastLine = new String(h, 0, index+1);
+                //System.arraycopy(h, 0, b, 0, index+1);
+                //System.out.println("Index = "+index);
+                //System.out.println(lineBuffer[index]);
+                return index+1;//-endSeq.length+1;
+            }
+            index++;
         }
     }
 

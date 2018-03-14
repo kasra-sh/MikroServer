@@ -50,12 +50,7 @@ public class Request {
     }
 
     public String getHeader(String name) {
-        String v = conn.getHeaders().getProperty(name);
-        if (v==null) {
-            v = conn.getHeaders().getProperty(name.toLowerCase());
-            //if (v == null) return null;
-        }
-        return v;
+        return conn.getHeader(name);
     }
 
     public Set<String> getHeaders() {

@@ -156,7 +156,7 @@ public abstract class Handler {
                     }
                     fis.close();
                     res.finish();
-                    conn.socketIO().close();
+                    conn.kSocket().close();
                     return 0;
                 }
 
@@ -168,7 +168,7 @@ public abstract class Handler {
                 res.writeAll("Not Found !");
                 res.finish();
                 //System.out.println(new String(h,0,l));
-                System.out.println("From IP: "+ conn.socketIO().getSocket().getInetAddress());
+                System.out.println("From IP: "+ conn.kSocket().getSocket().getInetAddress());
                 // FIXME: 11/14/17
                 return ResponseCode.NOT_FOUND;
             }
@@ -176,7 +176,7 @@ public abstract class Handler {
             // FIXME: 11/14/17
             System.out.println("No file address or Directory");
             //System.out.println(new String(h,0,l));
-            System.out.println("From IP: "+ conn.socketIO().getSocket().getInetAddress());
+            System.out.println("From IP: "+ conn.kSocket().getSocket().getInetAddress());
             res.finish();
             //System.out.println();
             return ResponseCode.NOT_FOUND;
@@ -270,7 +270,7 @@ public abstract class Handler {
             }
             in.close();
             res.finish();
-            conn.socketIO().close();
+            conn.kSocket().close();
             return 0;
         }
 

@@ -109,7 +109,7 @@ public class KSocket {
     }
 
     public int readLineBytes(byte[] b, int limit, byte[] ... endSeq) throws IOException, IndexOutOfBoundsException {
-        setLineBufferSize(lineBufferSize);
+        setLineBufferSize(limit);
         int index=0;
         boolean match = false;
         while (true) {
