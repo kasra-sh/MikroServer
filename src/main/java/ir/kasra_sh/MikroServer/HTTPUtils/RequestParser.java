@@ -285,6 +285,10 @@ public class RequestParser {
             //System.out.println("not post");
             return;
         }
+
+        if (connection.multipart != null) {
+            return;
+        }
         //System.out.println(connection.getHeaders().stringPropertyNames());
         String ct = connection.getHeader("Content-Type");
         if (!ct.startsWith("multipart")) {
