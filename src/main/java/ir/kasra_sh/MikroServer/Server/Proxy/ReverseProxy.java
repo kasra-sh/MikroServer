@@ -49,6 +49,10 @@ public class ReverseProxy implements Runnable {
                 len = Integer.valueOf(user.getHeader("Content-Length"));
             }catch (Exception e) {
             }
+            user.getRawHeader().setLength(user.getRawHeader().length()-2);
+            user.getRawHeader()
+                    .append("X-Client-IP: ").append(user.kSocket().getSocket().getInetAddress()).append("\r\n")
+                    .append("\r\n");
             svr.writeString(user.getRawHeader().toString());
             svr.flush();
             int read=0;
@@ -78,6 +82,7 @@ public class ReverseProxy implements Runnable {
                         svrConn.getHeaders().entrySet()) {
                     user.kSocket().writeString(x.getKey() + ": "+x.getValue()+"\r\n");
                 }
+                //user.kSocket().writeString("X-Client-IP: ");
                 user.kSocket().writeString("\r\n");
             }
             while (true) {
