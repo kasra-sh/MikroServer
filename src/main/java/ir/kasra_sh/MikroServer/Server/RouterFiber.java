@@ -47,6 +47,7 @@ public class RouterFiber implements Runnable {
                 boolean found = false;
                 requestParser = new RequestParser(socket);
                 String route = requestParser.getRoute();
+                //socket.getSocket().getInetAddress().getHostAddress()
                 //System.out.println("Route = "+route);
 
                 if (route == null) {

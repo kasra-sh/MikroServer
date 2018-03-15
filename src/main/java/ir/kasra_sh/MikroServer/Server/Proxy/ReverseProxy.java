@@ -51,7 +51,7 @@ public class ReverseProxy implements Runnable {
             }
             user.getRawHeader().setLength(user.getRawHeader().length()-2);
             user.getRawHeader()
-                    .append("X-Client-IP: ").append(user.kSocket().getSocket().getInetAddress()).append("\r\n")
+                    .append("X-Client-IP: ").append(user.kSocket().getSocket().getInetAddress().toString().substring(1)).append("\r\n")
                     .append("\r\n");
             svr.writeString(user.getRawHeader().toString());
             svr.flush();
