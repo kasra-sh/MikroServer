@@ -32,6 +32,7 @@ public class ReverseProxy implements Runnable {
     @Override
     public void run() {
         try {
+            //System.out.println("Routing ...");
             StringBuilder p = new StringBuilder();
             p.append(user.kSocket().getSocket().getInetAddress()).append(" - ");
             p.append(Date.from(Instant.now()));
@@ -60,7 +61,9 @@ public class ReverseProxy implements Runnable {
             RequestParser rp = new RequestParser(svr);
             rp.parseResponseHeader();
             HTTPConnection svrConn = rp.getHTTPConnection();
-            if (overrides.isEmpty()) {
+            if (overrides == null) {
+                user.kSocket().writeString(svrConn.getRawHeader().toString());
+            } else if (overrides.isEmpty()) {
                 user.kSocket().writeString(svrConn.getRawHeader().toString());
             }
             else {
@@ -92,7 +95,7 @@ public class ReverseProxy implements Runnable {
 
 
         } catch (Exception e){
-            //e.printStackTrace();
+            e.printStackTrace();
             user.writer.finish();
         } finally {
             user.writer.finish();

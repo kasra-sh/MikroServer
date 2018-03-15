@@ -112,9 +112,11 @@ public class RouterFiber implements Runnable {
                         String pt = e.getKey();
                         if (e.getKey().endsWith("*")) {
                             pt = e.getKey().replace("*", "[_\\-\\.\\?\\&\\w\\d\\/\\%]*");
-                            //System.out.println(pt);
+                            //System.out.println("Pattern: "+pt);
+                            //System.out.println("Route: "+route);
                         }
                         if (route.matches(pt)) {
+                            //System.out.println("Matched");
                             requestParser.parseHeader();
                             connection = requestParser.getHTTPConnection();
                             connection.setContext(e.getKey().replace("*",""));
@@ -126,7 +128,7 @@ public class RouterFiber implements Runnable {
                                 break;
                             }
                             ReverseProxy rp = new ReverseProxy(e.getValue(),connection);
-                            rp.setOverrides(overrides.get(pt));
+                            rp.setOverrides(overrides.get(e.getKey()));
                             rp.run();
                             found = true;
                             break;
