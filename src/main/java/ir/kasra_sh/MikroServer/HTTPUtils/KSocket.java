@@ -168,7 +168,7 @@ public class KSocket {
     }
 
     public void writeString(String s) throws IOException {
-        dos.writeBytes(s);
+        dos.write(s.getBytes("UTF-8"));
     }
 
     public void writeChar(int c) throws IOException {

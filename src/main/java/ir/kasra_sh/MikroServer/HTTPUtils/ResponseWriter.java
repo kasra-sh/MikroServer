@@ -94,11 +94,11 @@ public class ResponseWriter {
             header.setContentLength(s.length());
             writeHeader();
         }
-        try {
-            compress(s.getBytes());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            compress(s.getBytes());
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
         KSocket.writeString(s);
         KSocket.flush();
         KSocket.close();
@@ -107,7 +107,7 @@ public class ResponseWriter {
     public void writeResponseCompressed(int responseCode, String s){
         byte[] comp;
         try {
-            comp = compress(s.getBytes());
+            comp = compress(s.getBytes("UTF-8"));
             if (!rh) {
                 header.setStatus(responseCode);
                 header.setContentLength(comp.length);
