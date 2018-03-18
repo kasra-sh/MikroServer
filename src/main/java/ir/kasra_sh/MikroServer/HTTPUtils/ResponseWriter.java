@@ -2,6 +2,7 @@ package ir.kasra_sh.MikroServer.HTTPUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.zip.Deflater;
 
 public class ResponseWriter {
@@ -77,21 +78,29 @@ public class ResponseWriter {
     }
 
     public void writeAll(String s){
-        if (!rh) {
-            header.setContentLength(s.length());
-            writeHeader();
-        }
         try {
-            KSocket.writeString(s);
-        } catch (IOException e) {}
-        KSocket.flush();
-        KSocket.close();
+            byte[] bt = s.getBytes("UTF-8");
+            if (!rh) {
+                header.setContentLength(bt.length);
+                writeHeader();
+            }
+            try {
+                KSocket.writeBytes(bt);
+            } catch (IOException e) {}
+            KSocket.flush();
+            KSocket.close();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
     public void writeResponse(int responseCode, String s) throws IOException {
+        byte[] bt = s.getBytes("UTF-8");
         if (!rh) {
             header.setStatus(responseCode);
-            header.setContentLength(s.length());
+            header.setContentLength(bt.length);
             writeHeader();
         }
 //        try {
@@ -99,7 +108,7 @@ public class ResponseWriter {
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
-        KSocket.writeString(s);
+        KSocket.writeBytes(bt);
         KSocket.flush();
         KSocket.close();
     }
