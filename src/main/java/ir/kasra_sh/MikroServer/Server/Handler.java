@@ -3,6 +3,8 @@ package ir.kasra_sh.MikroServer.Server;
 import co.paralleluniverse.fibers.Suspendable;
 import ir.kasra_sh.MikroServer.HTTPUtils.*;
 import ir.kasra_sh.MikroServer.Utils.MimeTypes;
+
+import javax.jws.WebMethod;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -14,6 +16,7 @@ public abstract class Handler {
     protected HTTPConnection conn;
     protected ResponseWriter res;
     protected Request req;
+    private long startTime;
 
     public void setConnection(HTTPConnection conn){
         this.conn = conn;

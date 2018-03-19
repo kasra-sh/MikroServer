@@ -1,9 +1,7 @@
 package ir.kasra_sh.MikroServer;
 
-import co.paralleluniverse.fibers.SuspendExecution;
 import ir.kasra_sh.MikroServer.Server.Mikro;
 
-import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.util.HashMap;
 
@@ -16,11 +14,16 @@ public class Test {
         Mikro mikro = new Mikro();
         HashMap<String, String> ovr = new HashMap<>();
         ovr.putIfAbsent("Server", "MikroServer");
-        mikro.addProxyPath("/tes*", new InetSocketAddress("localhost", 8080), ovr);
+        try {
+            mikro.addHandler(MultiHandler.class);
+            mikro.addProxyPath("/tes*", new InetSocketAddress("localhost", 8080), ovr);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
 
         try {
-            mikro.addContextHandler("/test",new MultiHandler());
-            mikro.start(8000, 5, false);
+            mikro.start(8000, 5, true);
         } catch (Exception e) {
             e.printStackTrace();
         }

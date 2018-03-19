@@ -3,6 +3,8 @@ package ir.kasra_sh.MikroServer.HTTPUtils;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.sql.Date;
+import java.time.Instant;
 import java.util.zip.Deflater;
 
 public class ResponseWriter {
@@ -22,6 +24,7 @@ public class ResponseWriter {
     public void writeHeader(){
         if (!rh) {
             try {
+                header.setProperty("Date", Date.from(Instant.now()).toString());
                 KSocket.writeString(header.getFullHeader());
             } catch (IOException e) {
                 //e.printStackTrace();

@@ -14,28 +14,30 @@ import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.security.*;
 import java.security.cert.CertificateException;
+import java.sql.Time;
 import java.time.Instant;
 import java.util.*;
+import java.util.AbstractMap.*;
+import java.util.Map.*;
 import java.util.concurrent.ForkJoinPool;
 
 public class SocketListener extends Thread{
     private ServerSocket serverSocket;
-    private SocketReceiver[] socketReceivers;
     private boolean tls = false;
     private KSocket socket;
     private boolean useFibers = true;
     //private WorkerThread[] workerThreads;
     private int workers=4;
-    private Set<Map.Entry<String,Handler>> routes;
-    private Set<Map.Entry<String,AbstractMap.SimpleEntry<Handler,String>>> files;
-    private Set<Map.Entry<String, InetSocketAddress>> proxies;
+    private Set<Entry<String, Class<? extends Handler>>> routes;
+    private Set<Entry<String, SimpleEntry<Class<? extends Handler>,String>>> files;
+    private Set<Entry<String, InetSocketAddress>> proxies;
     private HashMap<String, HashMap<String, String>> overrides;
 
     private boolean stop = false;
 
     protected SocketListener(int port,
-                             Hashtable<String,Handler> routes,
-                             Hashtable<String,AbstractMap.SimpleEntry<Handler,String>> files,
+                             Hashtable<String,Class<? extends Handler>> routes,
+                             Hashtable<String, SimpleEntry<Class<? extends Handler>,String>> files,
                              Hashtable<String, InetSocketAddress> proxies,
                              HashMap<String, HashMap<String, String>> overrides) {
         stop = false;
@@ -51,8 +53,8 @@ public class SocketListener extends Thread{
         }
     }
 
-    protected SocketListener(int port, Hashtable<String, Handler> routes,
-                             Hashtable<String, AbstractMap.SimpleEntry<Handler, String>> files,
+    protected SocketListener(int port, Hashtable<String, Class<? extends Handler>> routes,
+                             Hashtable<String, SimpleEntry<Class<? extends Handler>, String>> files,
                              Hashtable<String, InetSocketAddress> proxies,
                              HashMap<String, HashMap<String, String>> overrides,
                              String jkeystore) throws IOException {
@@ -156,7 +158,7 @@ public class SocketListener extends Thread{
         if (!useFibers) {
             forkJoinPool = new ForkJoinPool(workers);
         } else {
-            fes = new FiberForkJoinScheduler("sldef"+new Random(Date.from(Instant.now()).getTime()).nextLong(),workers,null, MonitorType.JMX, false);
+            fes = new FiberForkJoinScheduler("sldef"+new Random(Time.from(Instant.now()).getTime()).nextLong(),workers,null, MonitorType.JMX, false);
         }
 
         //FiberExecutorScheduler fes = new FiberExecutorScheduler("Sch", Executors.newWorkStealingPool(1));
