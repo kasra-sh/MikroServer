@@ -178,7 +178,7 @@ public class RouterFiber implements Runnable {
             else
                 Logger.logReqFinish(socket,startTime,200,route);
         } catch (Exception e){
-            //e.printStackTrace();
+            if (Logger.DEBUG) e.printStackTrace();
             Logger.logReqFinish(socket, startTime, 500, "Ex("+e.getMessage()+")");
         }
 

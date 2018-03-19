@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Logger {
+    public static boolean DEBUG = true;
     public static void logReqFinish(KSocket sock, long start, int code, String route, String ... extra){
         System.out.println(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MMM/yyyy hh:mm:ssa"))
                 + "> "
