@@ -258,7 +258,7 @@ public class RequestParser {
     public void getBody() throws IOException{
         int ln=-1;
         try {
-            ln = Integer.valueOf(connection.getHeaders().getProperty("Content-Length"));
+            ln = Integer.valueOf(connection.getHeader("Content-Length"));
         } catch (Exception w){
             if (Logger.DEBUG) w.printStackTrace();
         }
