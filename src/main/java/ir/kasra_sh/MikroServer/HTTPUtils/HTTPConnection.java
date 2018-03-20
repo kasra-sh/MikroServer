@@ -131,7 +131,7 @@ public class HTTPConnection {
                 this.bodyString = new String(this.body);
             }
             return this.bodyString;
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
