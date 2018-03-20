@@ -38,7 +38,7 @@ public class RequestParser {
         connection.setRequestParser(this);
         connection.setSocket(is);
         readLine();
-        System.out.println(new String(h,0,hl));
+        //System.out.println(new String(h,0,hl));
         parseHead();
         setMethod();
         spl = route.toString().split("\\?");
@@ -163,6 +163,7 @@ public class RequestParser {
         for (int i = 0; i < hl; i++) {
             connection.getRawHeader().append((char)h[i]);
         }
+
     }
 
     private void parseHead() throws IndexOutOfBoundsException {

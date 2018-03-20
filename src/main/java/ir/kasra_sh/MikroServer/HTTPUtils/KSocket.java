@@ -1,7 +1,10 @@
 package ir.kasra_sh.MikroServer.HTTPUtils;
 
+import ir.kasra_sh.MikroServer.Server.Logger;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.EOFException;
 import java.io.IOException;
 import java.net.Socket;
 
@@ -116,7 +119,25 @@ public class KSocket {
             if (index > limit) {
                 throw new IndexOutOfBoundsException("limit reached !");
             }
-            lineBuffer[index] = dis.readByte();
+            try {
+                lineBuffer[index] = dis.readByte();
+            } catch (EOFException e){
+                System.out.println("Index at "+index);
+                lastLine = new String(lineBuffer, 0, index+1);
+                System.arraycopy(lineBuffer, 0, b, 0, index+1);
+                if (Logger.DEBUG)
+                {
+                    System.out.println("LastLine : "+lastLine);
+                    System.out.println("EOF Exception");
+                }
+                //System.out.println("EOF !!!!!!!!!!");
+
+                //System.out.println("Index = "+index);
+                //System.out.println(lineBuffer[index]);
+                return index+1;
+
+            }
+
             //System.out.println("read char : "+(char)lineBuffer[index]);
             //if (index>0)
             for (int j = 0; j < endSeq.length; j++) {

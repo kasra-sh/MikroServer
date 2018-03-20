@@ -170,8 +170,15 @@ public class RouterFiber implements Runnable {
                 //requestParser.parseHeader();
                 //connection = requestParser.getHTTPConnection();
                 ResponseWriter writer = new ResponseWriter(socket);
-                writer.writeResponse(404,"Not Found !");
-                writer.finish();
+                try {
+                    writer.writeResponse(404, "Not Found !");
+                    writer.finish();
+                } catch (Exception e){
+                    if (Logger.DEBUG) {
+                        e.printStackTrace();
+                    }
+                }
+
                 //handler.handle(connection);
             }
             if (requestParser.getErrCode() == 0)
