@@ -51,7 +51,7 @@ public class RouterFiber implements Runnable {
             try {
                 route = requestParser.getRoute();
             } catch (Exception e){
-                throw new Exception("Malformed URL");
+                e.getStackTrace();
             }
 
             //socket.getSocket().getInetAddress().getHostAddress()
