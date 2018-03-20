@@ -51,7 +51,7 @@ public class RouterFiber implements Runnable {
             try {
                 route = requestParser.getRoute();
             } catch (Exception e){
-                e.getStackTrace();
+                //e.getStackTrace();
                 throw e;
             }
 
