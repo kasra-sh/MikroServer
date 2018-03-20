@@ -52,6 +52,7 @@ public class RouterFiber implements Runnable {
                 route = requestParser.getRoute();
             } catch (Exception e){
                 e.getStackTrace();
+                throw e;
             }
 
             //socket.getSocket().getInetAddress().getHostAddress()
