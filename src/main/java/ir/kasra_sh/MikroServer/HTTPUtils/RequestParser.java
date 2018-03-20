@@ -36,6 +36,7 @@ public class RequestParser {
         connection.setRequestParser(this);
         connection.setSocket(is);
         readLine();
+        System.out.println(new String(h,0,hl));
         parseHead();
         setMethod();
         spl = route.toString().split("\\?");
