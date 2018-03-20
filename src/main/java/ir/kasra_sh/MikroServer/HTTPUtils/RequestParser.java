@@ -1,6 +1,8 @@
 package ir.kasra_sh.MikroServer.HTTPUtils;
 
 
+import ir.kasra_sh.MikroServer.Server.Logger;
+
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
@@ -257,7 +259,9 @@ public class RequestParser {
         int ln=-1;
         try {
             ln = Integer.valueOf(connection.getHeaders().getProperty("Content-Length"));
-        } catch (Exception w){ }
+        } catch (Exception w){
+            if (Logger.DEBUG) w.printStackTrace();
+        }
 
         if (connection.getMethod() != HTTPMethod.POST || ln<=0) {
             return;
