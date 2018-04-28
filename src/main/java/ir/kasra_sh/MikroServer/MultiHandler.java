@@ -14,14 +14,7 @@ import java.io.IOException;
 public class MultiHandler extends HTTPHandler {
     @Override
     public int handle() {
-        //System.out.println(conn.getMultiPart().keySet());
-        //conn.getMultiPart();
         try {
-
-            //Gson gs = new Gson();
-            //gs.toJson();
-            //Files.write(Paths.get("/home/blkr/xxx.png"),conn.getFormData("photo"));
-            //System.out.println("Handling :)");
             Gson gson = new Gson();
             JsonObject jso = gson.fromJson(conn.getBody(), JsonObject.class);
             String user_id = String.valueOf(jso.get("user_id").getAsLong());
