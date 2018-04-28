@@ -28,16 +28,16 @@ public class SocketListener extends Thread{
     private boolean useFibers = true;
     //private WorkerThread[] workerThreads;
     private int workers=4;
-    private Set<Entry<String, Class<? extends Handler>>> routes;
-    private Set<Entry<String, SimpleEntry<Class<? extends Handler>,String>>> files;
+    private Set<Entry<String, Class<? extends HTTPHandler>>> routes;
+    private Set<Entry<String, SimpleEntry<Class<? extends HTTPHandler>,String>>> files;
     private Set<Entry<String, InetSocketAddress>> proxies;
     private HashMap<String, HashMap<String, String>> overrides;
 
     private boolean stop = false;
 
     protected SocketListener(int port,
-                             Hashtable<String,Class<? extends Handler>> routes,
-                             Hashtable<String, SimpleEntry<Class<? extends Handler>,String>> files,
+                             Hashtable<String,Class<? extends HTTPHandler>> routes,
+                             Hashtable<String, SimpleEntry<Class<? extends HTTPHandler>,String>> files,
                              Hashtable<String, InetSocketAddress> proxies,
                              HashMap<String, HashMap<String, String>> overrides) {
         stop = false;
@@ -53,8 +53,8 @@ public class SocketListener extends Thread{
         }
     }
 
-    protected SocketListener(int port, Hashtable<String, Class<? extends Handler>> routes,
-                             Hashtable<String, SimpleEntry<Class<? extends Handler>, String>> files,
+    protected SocketListener(int port, Hashtable<String, Class<? extends HTTPHandler>> routes,
+                             Hashtable<String, SimpleEntry<Class<? extends HTTPHandler>, String>> files,
                              Hashtable<String, InetSocketAddress> proxies,
                              HashMap<String, HashMap<String, String>> overrides,
                              String jkeystore) throws IOException {

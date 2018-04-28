@@ -5,16 +5,13 @@ import com.google.gson.JsonObject;
 import ir.kasra_sh.MikroServer.HTTPUtils.HTTPMethod;
 import ir.kasra_sh.MikroServer.Server.Annotations.Methods;
 import ir.kasra_sh.MikroServer.Server.Annotations.Route;
-import ir.kasra_sh.MikroServer.Server.Handler;
+import ir.kasra_sh.MikroServer.Server.HTTPHandler;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 @Methods(HTTPMethod.POST)
 @Route("/api/getselfposts")
-public class MultiHandler extends Handler {
+public class MultiHandler extends HTTPHandler {
     @Override
     public int handle() {
         //System.out.println(conn.getMultiPart().keySet());

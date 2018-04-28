@@ -11,7 +11,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 @Suspendable
-public abstract class Handler {
+public abstract class HTTPHandler {
     protected String CONTEXT;
     protected HTTPConnection conn;
     protected ResponseWriter res;

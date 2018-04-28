@@ -7,16 +7,14 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.sql.Time;
 import java.time.Instant;
-import java.util.AbstractMap;
 import java.util.AbstractMap.*;
 import java.util.HashMap;
 import java.util.Hashtable;
-import java.util.Map.*;
 
 public class Mikro {
     private SocketListener sl;
-    private Hashtable<String,Class<? extends Handler>> routes = new Hashtable<>();
-    private Hashtable<String,SimpleEntry<Class<? extends Handler>,String>> filePaths = new Hashtable<>();
+    private Hashtable<String,Class<? extends HTTPHandler>> routes = new Hashtable<>();
+    private Hashtable<String,SimpleEntry<Class<? extends HTTPHandler>,String>> filePaths = new Hashtable<>();
     private Hashtable<String,InetSocketAddress> proxies = new Hashtable<>();
     private HashMap<String, HashMap<String, String>> overrides = new HashMap<>();
     private String ks = null;
@@ -24,8 +22,8 @@ public class Mikro {
     public Mikro() {
     }
 
-    public void addHandler(Class<? extends Handler> h) {
-        //if (c.isInstance(Handler.class)) {
+    public void addHandler(Class<? extends HTTPHandler> h) {
+        //if (c.isInstance(HTTPHandler.class)) {
         String con = h.getAnnotation(Route.class).value();
         if (con.equals("")) {
             System.out.println("Warning : couldn't add handler("+h.getName()+"); no @Route specified !");
@@ -45,7 +43,7 @@ public class Mikro {
         //}else throw new Exception(c.getName());
     }
 
-    public void addFileHandler(String dir, Class<? extends Handler> h){
+    public void addFileHandler(String dir, Class<? extends HTTPHandler> h){
         String con = h.getAnnotation(Route.class).value();
         if (con.equals("")) {
             System.out.println("Warning : couldn't add handler("+h.getName()+"); no @Route specified !");

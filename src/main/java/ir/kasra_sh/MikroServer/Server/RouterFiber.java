@@ -19,17 +19,17 @@ public class RouterFiber implements Runnable {
 
     private KSocket socket;
     private RequestParser requestParser;
-    private Handler handler;
-    private Set<Entry<String, Class<? extends Handler>>> routes;
-    private Set<Entry<String, SimpleEntry<Class<? extends Handler>,String>>> files;
+    private HTTPHandler handler;
+    private Set<Entry<String, Class<? extends HTTPHandler>>> routes;
+    private Set<Entry<String, SimpleEntry<Class<? extends HTTPHandler>,String>>> files;
     private Set<Entry<String, InetSocketAddress>> proxies;
     private HashMap<String,HashMap<String, String>> overrides;
     private HTTPConnection connection;
 
 
     public RouterFiber(KSocket s,
-                       Set<Entry<String, Class<? extends Handler>>> routes,
-                       Set<Entry<String, SimpleEntry<Class<? extends Handler>,String>>> files,
+                       Set<Entry<String, Class<? extends HTTPHandler>>> routes,
+                       Set<Entry<String, SimpleEntry<Class<? extends HTTPHandler>,String>>> files,
                        Set<Entry<String, InetSocketAddress>> proxies,
                        HashMap<String, HashMap<String, String>> overrides) throws IOException {
         this.proxies = proxies;
@@ -64,7 +64,7 @@ public class RouterFiber implements Runnable {
             }
 
             if (!found)
-            for (Entry<String, Class<? extends Handler>> e:
+            for (Entry<String, Class<? extends HTTPHandler>> e:
                     routes) {
                 String pt=e.getKey();
                 if (e.getKey().endsWith("*")) {
@@ -107,7 +107,7 @@ public class RouterFiber implements Runnable {
                 }
             }
             if (!found) {
-                for (Entry<String, SimpleEntry<Class<? extends Handler>,String>> e :
+                for (Entry<String, SimpleEntry<Class<? extends HTTPHandler>,String>> e :
                         files) {
                     String pt = e.getKey();
                     if (e.getKey().endsWith("*")) {
