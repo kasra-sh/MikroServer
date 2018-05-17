@@ -3,7 +3,7 @@ package ir.kasra_sh.MikroServer.Server;
 
 import co.paralleluniverse.common.monitoring.MonitorType;
 import co.paralleluniverse.fibers.FiberForkJoinScheduler;
-import ir.kasra_sh.MikroServer.HTTPUtils.KSocket;
+import ir.kasra_sh.MikroServer.Utils.KSocket;
 
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;

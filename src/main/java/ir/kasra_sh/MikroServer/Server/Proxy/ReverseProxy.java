@@ -2,7 +2,7 @@ package ir.kasra_sh.MikroServer.Server.Proxy;
 
 import co.paralleluniverse.fibers.Suspendable;
 import ir.kasra_sh.MikroServer.HTTPUtils.HTTPConnection;
-import ir.kasra_sh.MikroServer.HTTPUtils.KSocket;
+import ir.kasra_sh.MikroServer.Utils.KSocket;
 import ir.kasra_sh.MikroServer.HTTPUtils.RequestParser;
 
 import java.net.*;

@@ -1,5 +1,7 @@
 package ir.kasra_sh.MikroServer.HTTPUtils;
 
+import ir.kasra_sh.MikroServer.Utils.KSocket;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -11,7 +13,7 @@ public class ResponseWriter {
     public ResponseHeader header = new ResponseHeader();
     private String h;
     boolean rh=false;
-    private KSocket KSocket;
+    private ir.kasra_sh.MikroServer.Utils.KSocket KSocket;
 
     public ResponseWriter(KSocket KSocket) {
         this.KSocket = KSocket;

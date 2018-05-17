@@ -1,10 +1,9 @@
 package ir.kasra_sh.MikroServer.HTTPUtils;
 
 import co.paralleluniverse.fibers.Suspendable;
+import ir.kasra_sh.MikroServer.Utils.KSocket;
 
-import java.io.DataOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Properties;
 

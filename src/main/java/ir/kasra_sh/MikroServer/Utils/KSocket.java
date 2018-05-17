@@ -1,6 +1,4 @@
-package ir.kasra_sh.MikroServer.HTTPUtils;
-
-import ir.kasra_sh.MikroServer.Server.Logger;
+package ir.kasra_sh.MikroServer.Utils;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -9,7 +7,7 @@ import java.io.IOException;
 import java.net.Socket;
 
 public class KSocket {
-    private java.net.Socket socket = null;
+    private Socket socket = null;
     private DataInputStream dis;
     private DataOutputStream dos;
     private byte[] lineBuffer;
@@ -19,12 +17,12 @@ public class KSocket {
     private char lastChar;
     private int lineBufferSize = 2048;
 
-    public KSocket(java.net.Socket socket) throws IOException {
+    public KSocket(Socket socket) throws IOException {
         this.socket = socket;
         init();
     }
 
-    public KSocket(java.net.Socket socket, int lineBufferSize) throws IOException {
+    public KSocket(Socket socket, int lineBufferSize) throws IOException {
         this.socket = socket;
         this.lineBufferSize = lineBufferSize;
         init();
@@ -125,15 +123,7 @@ public class KSocket {
                 System.out.println("Index at "+index);
                 lastLine = new String(lineBuffer, 0, index+1);
                 System.arraycopy(lineBuffer, 0, b, 0, index+1);
-                if (Logger.DEBUG)
-                {
-                    System.out.println("LastLine : "+lastLine);
-                    System.out.println("EOF Exception");
-                }
-                //System.out.println("EOF !!!!!!!!!!");
 
-                //System.out.println("Index = "+index);
-                //System.out.println(lineBuffer[index]);
                 return index+1;
 
             }

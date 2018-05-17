@@ -46,7 +46,7 @@ public class EsonObj {
         return this;
     }
 
-    public EsonObj add(String k, float v) {
+    public EsonObj add(String k, double v) {
         try {
             jsonObject.put(k, v);
         } catch (Exception e){
@@ -170,15 +170,15 @@ public class EsonObj {
     }
 
     public <T> T mapObject(String k, Class<T> tClass) {
-        return Eson.fromJson(jsonObject.optString(k,""), tClass);
+        return Eson.mapObject(jsonObject.optString(k,""), tClass);
     }
 
     public <T> ArrayList<T> mapArray(String k, Class<T> tClass) {
-        return Eson.fromJsonArray(jsonObject.optString(k, ""), tClass);
+        return Eson.mapArray(jsonObject.optString(k, ""), tClass);
     }
 
     public <T> T mapSelf(Class<T> tClass) {
-        return Eson.fromJson(jsonObject.toString(), tClass);
+        return Eson.mapObject(jsonObject.toString(), tClass);
     }
 
     public String toString(int indent) {
